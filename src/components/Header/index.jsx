@@ -1,23 +1,22 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
-import { theme } from "../theme";
 function Header() {
   return (
     <Box
       pos="fixed"
-      top={theme.sizes.space.none}
+      top="0"
       display="flex"
       justifyContent="space-around"
       alignItems="center"
-      width={theme.sizes.containers.full}
-      height={theme.sizes.containers.small}
+      width="full"
+      height="14"
       _before={{
         content: `""`,
         position: "absolute",
-        width: `${theme.sizes.containers.full}`,
-        height: `${theme.sizes.containers.full}`,
-        right: `${theme.sizes.space.none}`,
-        boxShadow: "0 0 10px 0 grey",
+        width: "full",
+        height: "full",
+        right: 0,
+        boxShadow: "lg",
       }}
     >
       <Text>header1</Text>
