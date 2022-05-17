@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Header />
-      <Box maxW="max" m="24" align="center">
+      <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
         <Card />
       </Box>
     </div>
