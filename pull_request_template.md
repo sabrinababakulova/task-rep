@@ -1,12 +1,15 @@
 THIS PROJECT IS IN DEVELOPMENT MODE.
 
-<!--- Provide a general summary of your changes in the Title above -->
+Added switch toggle to checkbox
 
 ## Description
-<!--- Describe your changes in detail -->
 
+with every check the color of the Card changes from gray to darker shade of gray
 
 ## Context
+
 <!--- Why is this change required? What problem does it solve? -->
+
+this helped to enhance UI
 
 ## Screenshots (if appropriate):
