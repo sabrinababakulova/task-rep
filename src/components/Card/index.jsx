@@ -22,14 +22,14 @@ function isEmpty(str) {
 }
 
 class Card extends Component {
-    constructor(props) {
-        super(props)
+    constructor({ header, body }) {
+        super({ header, body })
         this.state = {
-            header: 'Initial Caption',
-            body: 'Initial text',
+            header: header,
+            body: body,
             isEditing: false,
-            revertHeader: 'Initial Caption',
-            revertBody: 'Initial text',
+            revertHeader: header,
+            revertBody: body,
             checked: false,
             editApproved: true,
         }

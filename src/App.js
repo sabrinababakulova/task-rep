@@ -8,7 +8,7 @@ function App() {
         <div>
             <Header />
             <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
-                <Card />
+                <Card header="Initial Caption" body="Initial Text" />
             </Box>
         </div>
     )
