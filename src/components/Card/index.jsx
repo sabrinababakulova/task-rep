@@ -6,30 +6,49 @@ import {
   Checkbox,
   IconButton,
   ButtonGroup,
-  Button,
   Spacer,
   Textarea,
   Input,
 } from "@chakra-ui/react";
 import { BsPencilSquare } from "react-icons/bs";
+import { FaRegSave } from "react-icons/fa";
+import { GrRevert } from "react-icons/gr";
 
 class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      header: "",
-      body: "",
+      header: "Initial Caption",
+      body: "Initial text",
       isEditing: false,
       revertBody: "",
       revertHeader: "",
       checked: false,
     };
   }
-  componentDidMount() {
-    const text = "Some random text";
-    const caption = "Caption";
-
-    this.setState({ body: text, header: caption });
+  validationOnDiscard() {
+    if (
+      this.state.revertBody.length !== 0 ||
+      this.state.revertHeader.length !== 0
+    ) {
+      this.setState({
+        body: this.state.revertBody,
+        header: this.state.revertHeader,
+      });
+    }
+    this.setState({ isEditing: false });
+  }
+  validationOnSave() {
+    if (this.state.body.length === 0 && this.state.header.length === 0) {
+      alert("The fields should not be empty");
+      this.setState({ isEditing: true });
+    } else {
+      this.setState({
+        revertHeader: this.state.header,
+        revertBody: this.state.body,
+        isEditing: false,
+      });
+    }
   }
 
   render() {
@@ -64,6 +83,7 @@ class Card extends Component {
         <Divider h={2} />
         <Textarea
           value={body}
+          fontSize="xl"
           variant={isEditing ? "filled" : "unstyled"}
           onClick={() => this.setState({ revertBody: this.state.body })}
           isReadOnly={!isEditing}
@@ -77,40 +97,27 @@ class Card extends Component {
           <ButtonGroup
             justifyContent="space-around"
             w="full"
-            size="sm"
+            size="lg"
             onClick={() => {
-              this.setState({ isEditing: false });
               this.setState({ checked: false });
             }}
           >
-            <Button
-              variant="outline"
-              onClick={() =>
-                this.setState({
-                  revertHeader: this.state.header,
-                  revertBody: this.state.body,
-                })
-              }
-            >
-              Save changes
-            </Button>
-            <Button
-              variant="outline"
+            <IconButton
+              icon={<GrRevert size="32" />}
               onClick={() => {
-                this.setState({
-                  body: this.state.revertBody,
-                  header: this.state.revertHeader,
-                });
+                this.validationOnDiscard();
               }}
-            >
-              Discard changes
-            </Button>
+            />
+            <IconButton
+              icon={<FaRegSave size="32" />}
+              onClick={() => this.validationOnSave()}
+            />
           </ButtonGroup>
         ) : (
           <IconButton
-            size="sm"
+            size="lg"
             isLoading={isEditing}
-            icon={<BsPencilSquare size="20" />}
+            icon={<BsPencilSquare size="32" />}
             onClick={() => {
               this.setState({ isEditing: true });
               this.setState({ checked: false });
