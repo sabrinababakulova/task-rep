@@ -36,24 +36,20 @@ class Card extends Component {
     }
 
     validationOnDiscard() {
-        if (!isEmpty(this.state.revertHeader)) {
-            this.setState({
-                header: this.state.revertHeader,
-                body: this.state.revertBody,
-                editApproved: true,
-                isEditing: false,
-            })
-        } else {
-            this.setState({
-                editApproved: false,
-                isEditing: true,
-            })
-        }
+        this.setState({
+            header: this.state.revertHeader,
+            body: this.state.revertBody,
+            editApproved: true,
+            isEditing: false,
+        })
     }
 
     validationOnSave() {
         if (isEmpty(this.state.header)) {
-            this.setState({ isEditing: true, editApproved: false })
+            this.setState({
+                isEditing: true,
+                editApproved: false,
+            })
         } else {
             this.setState({
                 revertHeader: this.state.header,
@@ -84,11 +80,6 @@ class Card extends Component {
                             fontSize="2xl"
                             isReadOnly={!isEditing}
                             value={header}
-                            onClick={() =>
-                                this.setState({
-                                    revertHeader: this.state.header,
-                                })
-                            }
                             onChange={(e) =>
                                 this.setState({ header: e.target.value })
                             }
