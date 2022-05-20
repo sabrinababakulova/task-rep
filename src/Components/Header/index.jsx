@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, Flex } from '@chakra-ui/react'
-function Header() {
+const Header = () => {
     return (
         <Flex
             pos="fixed"

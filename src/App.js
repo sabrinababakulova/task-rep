@@ -9,7 +9,7 @@ function App() {
         <div>
             <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
                 <Header />
-                <CardList props={CardData} />
+                <CardList CardData={CardData} />
             </Box>
         </div>
     )
