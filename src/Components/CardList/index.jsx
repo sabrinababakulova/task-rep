@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Box, Grid, Button } from '@chakra-ui/react'
-import Card from './CardSingle'
+import Card from '../Card'
 
-function Collection(props) {
+function CardList({ props }) {
     const [isReadOnly, setIsReadOnly] = useState(false)
-
     return (
         <Box zIndex={0}>
             <Button
@@ -20,17 +19,12 @@ function Collection(props) {
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
                 gap={8}
             >
-                {[...Array(8)].map((e, i) => (
-                    <Card
-                        key={i}
-                        header={props.header}
-                        body={props.body}
-                        isReadOnly={isReadOnly}
-                    />
+                {props.map((e, i) => (
+                    <Card key={i} data={props[i]} isReadOnly={isReadOnly} />
                 ))}
             </Grid>
         </Box>
     )
 }
 
-export default Collection
+export default CardList

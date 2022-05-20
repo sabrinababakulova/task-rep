@@ -20,8 +20,8 @@ class Card extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            header: props.header,
-            body: props.body,
+            header: props.data.Header,
+            body: props.data.Body,
             revertHeader: '',
             revertBody: '',
             boxChecked: false,
@@ -30,6 +30,7 @@ class Card extends Component {
             isReadOnly: props.isReadOnly,
         }
     }
+
     componentDidMount() {
         this.setState({
             revertHeader: this.state.header,
