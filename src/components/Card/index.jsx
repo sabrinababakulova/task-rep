@@ -1,149 +1,36 @@
-import React, { Component } from 'react'
-import {
-    Flex,
-    Box,
-    Divider,
-    Checkbox,
-    IconButton,
-    ButtonGroup,
-    Spacer,
-    Textarea,
-    FormErrorMessage,
-    Input,
-    FormControl,
-} from '@chakra-ui/react'
-import { BsPencilSquare } from 'react-icons/bs'
-import { FaRegSave } from 'react-icons/fa'
-import { GrRevert } from 'react-icons/gr'
+import React, { useState } from 'react'
+import { Box, Grid, Button } from '@chakra-ui/react'
+import Card from './CardSingle'
 
-//trimming to get rid of spaces
-function isEmpty(str) {
-    return !str.trim().length
-}
+function Collection(props) {
+    const [isReadOnly, setIsReadOnly] = useState(false)
 
-class Card extends Component {
-    constructor({ header, body }) {
-        super({ header, body })
-        this.state = {
-            header: header,
-            body: body,
-            isEditing: false,
-            revertHeader: header,
-            revertBody: body,
-            checked: false,
-            editApproved: true,
-        }
-    }
-
-    validationOnDiscard() {
-        this.setState({
-            header: this.state.revertHeader,
-            body: this.state.revertBody,
-            editApproved: true,
-            isEditing: false,
-        })
-    }
-
-    validationOnSave() {
-        if (isEmpty(this.state.header)) {
-            this.setState({
-                isEditing: true,
-                editApproved: false,
-            })
-        } else {
-            this.setState({
-                revertHeader: this.state.header,
-                revertBody: this.state.body,
-                isEditing: false,
-                editApproved: true,
-            })
-        }
-    }
-
-    render() {
-        const { body, header, checked, isEditing, editApproved } = this.state
-        return (
-            <Box
-                boxShadow="base"
-                p="6"
-                w={['sm', 'lg', '3xl']}
-                bg={checked ? 'gray.300' : 'gray.100'}
-                transition="0.2s linear"
+    return (
+        <Box zIndex={0}>
+            <Button
+                colorScheme="teal"
+                w="64"
+                variant={isReadOnly ? 'solid' : 'outline'}
+                bottom="1rem"
+                onClick={() => setIsReadOnly(!isReadOnly)}
             >
-                <Flex justifyContent="space-between">
-                    <FormControl
-                        isInvalid={!editApproved}
-                        onChange={() => this.setState({ editApproved: true })}
-                    >
-                        <Input
-                            variant={isEditing ? 'filled' : 'unstyled'}
-                            fontSize="2xl"
-                            isReadOnly={!isEditing}
-                            value={header}
-                            onChange={(e) =>
-                                this.setState({ header: e.target.value })
-                            }
-                        />
-                        {!editApproved && (
-                            <FormErrorMessage>
-                                Header should not be empty
-                            </FormErrorMessage>
-                        )}
-                    </FormControl>
-                    <Checkbox
-                        hidden={isEditing}
-                        onChange={() =>
-                            this.setState({ checked: !this.state.checked })
-                        }
-                        colorScheme="green"
-                        borderColor="gray.500"
-                        isChecked={checked}
-                    ></Checkbox>
-                </Flex>
-                <Divider h={2} />
-                <Textarea
-                    value={body}
-                    fontSize="xl"
-                    variant={isEditing ? 'outline' : 'unstyled'}
-                    onClick={() =>
-                        this.setState({ revertBody: this.state.body })
-                    }
-                    isReadOnly={!isEditing}
-                    onChange={(e) => this.setState({ body: e.target.value })}
-                />
-                <Spacer h="16" />
-
-                {isEditing ? (
-                    <ButtonGroup
-                        justifyContent="space-around"
-                        w="full"
-                        size="lg"
-                        onClick={() => this.setState({ checked: false })}
-                    >
-                        <IconButton
-                            icon={<GrRevert size="32" />}
-                            onClick={() => this.validationOnDiscard()}
-                        />
-                        <IconButton
-                            isDisabled={!editApproved}
-                            icon={<FaRegSave size="32" />}
-                            onClick={() => this.validationOnSave()}
-                        />
-                    </ButtonGroup>
-                ) : (
-                    <IconButton
-                        size="lg"
-                        isLoading={isEditing}
-                        icon={<BsPencilSquare size="32" />}
-                        onClick={() => {
-                            this.setState({ isEditing: true })
-                            this.setState({ checked: false })
-                        }}
+                Read Only
+            </Button>
+            <Grid
+                templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
+                gap={8}
+            >
+                {[...Array(8)].map((e, i) => (
+                    <Card
+                        key={i}
+                        header={props.header}
+                        body={props.body}
+                        isReadOnly={isReadOnly}
                     />
-                )}
-            </Box>
-        )
-    }
+                ))}
+            </Grid>
+        </Box>
+    )
 }
 
-export default Card
+export default Collection
