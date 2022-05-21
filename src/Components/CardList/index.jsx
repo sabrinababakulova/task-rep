@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { Box, Grid, Button } from '@chakra-ui/react'
 import Card from '../Card'
 
-const CardList = ({ CardData }) => {
-    const [isReadOnly, setIsReadOnly] = useState(false)
+const CardList = ({ cardData }) => {
+    const [readOnly, setReadOnly] = useState(false)
     return (
         <Box zIndex={0}>
             <Button
                 colorScheme="teal"
                 w="64"
-                variant={isReadOnly ? 'solid' : 'outline'}
+                variant={readOnly ? 'solid' : 'outline'}
                 bottom="1rem"
-                onClick={() => setIsReadOnly(!isReadOnly)}
+                onClick={() => setReadOnly(!readOnly)}
             >
                 Read Only
             </Button>
@@ -19,11 +19,11 @@ const CardList = ({ CardData }) => {
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
                 gap={8}
             >
-                {CardData.map((eachCard, index) => (
+                {cardData.map((eachCard) => (
                     <Card
                         key={eachCard.id}
                         data={eachCard}
-                        isReadOnly={isReadOnly}
+                        readOnly={readOnly}
                     />
                 ))}
             </Grid>

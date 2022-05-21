@@ -16,31 +16,31 @@ import { BsPencilSquare } from 'react-icons/bs'
 import { FaRegSave } from 'react-icons/fa'
 import { GrRevert } from 'react-icons/gr'
 
-const Card = (props) => {
-    const [header, setHeader] = useState(props.data.Header)
-    const [body, setBody] = useState(props.data.Body)
+const Card = ({ readOnly, data }) => {
+    const [header, setHeader] = useState(data.header)
+    const [body, setBody] = useState(data.body)
     const [revertHeader, setRevertHeader] = useState(header)
     const [revertBody, setRevertBody] = useState(body)
     const [boxChecked, setBoxChecked] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editApproved, setEditApproved] = useState(true)
-    const [isReadOnly, setIsReadOnly] = useState(props.isReadOnly)
+    const [isReadOnly, setIsReadOnly] = useState(readOnly)
     useEffect(() => {
         setHeader(revertHeader)
         setBody(revertBody)
-        setIsReadOnly(props.isReadOnly)
+        setIsReadOnly(readOnly)
         setIsEditing(false)
         setEditApproved(true)
-    }, [props.isReadOnly])
+    }, [readOnly])
 
-    function validationOnDiscard() {
+    const validationOnDiscard = () => {
         setHeader(revertHeader)
         setBody(revertBody)
         setEditApproved(true)
         setIsEditing(false)
     }
 
-    function validationOnSave() {
+    const validationOnSave = () => {
         //trimming to get rid of spaces
         const isEmpty = (str) => !str.trim().length
 
