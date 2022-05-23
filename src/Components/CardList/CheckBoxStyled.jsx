@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const CheckboxContainer = styled.div`
     display: inline-block;
     vertical-align: middle;
-    margin: 4px;
+    margin-bottom: 4px;
 `
 
 const Icon = styled.svg`
@@ -18,7 +18,6 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
     clip: rect(0 0 0 0);
     clippath: inset(50%);
     height: 1px;
-    margin: -1px;
     overflow: hidden;
     padding: 0;
     position: absolute;
@@ -30,6 +29,7 @@ const StyledCheckbox = styled.div`
     display: inline-block;
     width: 22px;
     height: 22px;
+    margin-top: 4px;
     border-radius: 6px;
     border: 2px solid teal;
     transition: all 200ms;
@@ -53,6 +53,6 @@ export const Checkbox = ({ checked, ...props }) => (
 
 export const LabelStyled = styled.label`
     border: 2px solid teal;
-    padding: 6px;
+    padding: 10px 2px 4px;
     border-radius: 6px;
 `
