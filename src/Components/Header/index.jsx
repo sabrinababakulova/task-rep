@@ -1,15 +1,18 @@
 import React from 'react'
-import { Box, Text } from '@chakra-ui/react'
-function Header() {
+import { Text, Flex } from '@chakra-ui/react'
+const Header = () => {
     return (
-        <Box
+        <Flex
             pos="fixed"
             top="0"
-            display="flex"
-            justifyContent="space-around"
-            alignItems="center"
+            right="0"
             width="full"
             height="14"
+            zIndex="1"
+            bg="white"
+            alignItems="center"
+            gap={['10', '20', '40']}
+            justifyContent="center"
             _before={{
                 content: `""`,
                 position: 'absolute',
@@ -23,7 +26,7 @@ function Header() {
             <Text>header2</Text>
             <Text>header3</Text>
             <Text>header4</Text>
-        </Box>
+        </Flex>
     )
 }
 
