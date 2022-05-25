@@ -1,15 +1,13 @@
-import Header from './Components/Header'
-import CardList from './Components/CardList'
-import cardData from './Data/CardData.json'
+import MainPage from './Pages/MainPage'
 import { Box } from '@chakra-ui/react'
 import React from 'react'
+import cardData from './Data/CardData.json'
 
 function App() {
     return (
         <div>
             <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
-                <Header />
-                <CardList cardData={cardData} />
+                <MainPage cardData={cardData} />
             </Box>
         </div>
     )

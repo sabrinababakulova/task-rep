@@ -1,21 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, Grid } from '@chakra-ui/react'
 import Card from '../Card'
-import { Checkbox, LabelStyled } from './CheckBoxStyled'
 
-const CardList = ({ cardData }) => {
-    const [readOnly, setReadOnly] = useState(false)
+const CardList = ({ cardData, readOnly, delClicked }) => {
     return (
         <Box zIndex={0}>
-            <LabelStyled>
-                <Checkbox
-                    checked={readOnly}
-                    onChange={() => {
-                        setReadOnly(!readOnly)
-                    }}
-                />
-                <span>Read Only</span>
-            </LabelStyled>
             <Grid
                 mt="4"
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
@@ -26,6 +15,7 @@ const CardList = ({ cardData }) => {
                         key={eachCard.id}
                         data={eachCard}
                         readOnly={readOnly}
+                        delClicked={delClicked}
                     />
                 ))}
             </Grid>
