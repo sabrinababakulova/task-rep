@@ -8,14 +8,14 @@ import {
     FormErrorMessage,
 } from '@chakra-ui/react'
 
-function index({
+const CardHeader = ({
     editApproved,
     isEditing,
     setHeader,
     setEditApproved,
     header,
     setBoxChecked,
-}) {
+}) => {
     return (
         <>
             <Flex justifyContent="space-between">
@@ -43,7 +43,6 @@ function index({
                     }}
                     colorScheme="green"
                     borderColor="gray.500"
-                    // isChecked={boxChecked}
                 ></Checkbox>
             </Flex>
 
@@ -52,4 +51,4 @@ function index({
     )
 }
 
-export default index
+export default CardHeader

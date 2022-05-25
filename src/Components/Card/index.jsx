@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Divider, IconButton, ButtonGroup, Spacer } from '@chakra-ui/react'
+import { Box, IconButton, ButtonGroup, Spacer } from '@chakra-ui/react'
 import { BsPencilSquare } from 'react-icons/bs'
 import { FaRegSave } from 'react-icons/fa'
 import { GrRevert } from 'react-icons/gr'
@@ -18,10 +18,8 @@ const Card = ({ readOnly, data, delClicked }) => {
     const [toDelete, setToDelete] = useState(false)
 
     useEffect(() => {
-        if (boxChecked) {
+        if (boxChecked && !isReadOnly) {
             setToDelete(true)
-        } else {
-            setToDelete(false)
         }
     }, [delClicked])
 

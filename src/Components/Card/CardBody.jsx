@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from '@chakra-ui/react'
 
-function index({ body, isEditing, setBody, setRevertBody }) {
+const CardBody = ({ body, isEditing, setBody, setRevertBody }) => {
     return (
         <Textarea
             value={body}
@@ -14,4 +14,4 @@ function index({ body, isEditing, setBody, setRevertBody }) {
     )
 }
 
-export default index
+export default CardBody
