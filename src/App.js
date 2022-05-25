@@ -1,4 +1,4 @@
-import MainPage from './Components/MainPage'
+import MainPage from './Pages/MainPage'
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 import cardData from './Data/CardData.json'

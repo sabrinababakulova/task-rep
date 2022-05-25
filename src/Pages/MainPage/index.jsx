@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Header from '../Header'
-import CardList from '../CardList'
-import FuncButtons from '../FuncButtons'
+import Header from '../../Components/Header'
+import CardList from '../../Components/CardList'
+import FuncButtons from '../../Components/FuncButtons'
 
 const index = ({ cardData }) => {
     const [readOnly, setReadOnly] = useState(false)
