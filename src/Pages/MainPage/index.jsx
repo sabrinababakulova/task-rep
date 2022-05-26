@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Header from '../../components/Header'
-import CardList from '../../components/CardList'
-import FuncButtons from '../../components/FuncButtons'
+import Header from '../../сomponents/Header'
+import CardList from '../../сomponents/CardList'
+import FuncButtons from '../../сomponents/FuncButtons'
 import { v4 as uuidv4 } from 'uuid'
 
 const index = ({ cardData }) => {
