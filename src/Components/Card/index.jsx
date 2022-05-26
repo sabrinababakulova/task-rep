@@ -41,7 +41,6 @@ const Card = ({ readOnly, data, delClicked }) => {
     const validationOnSave = () => {
         //trimming to get rid of spaces
         const isEmpty = (str) => !str.trim().length
-
         if (isEmpty(header)) {
             setIsEditing(true)
             setEditApproved(false)
@@ -55,7 +54,6 @@ const Card = ({ readOnly, data, delClicked }) => {
     if (boxChecked && toDelete) {
         return null
     }
-
     return (
         <Box
             boxShadow="base"

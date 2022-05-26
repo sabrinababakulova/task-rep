@@ -13,30 +13,5 @@
         "id": 3,
         "header": "Header3",
         "body": "Body3"
-    },
-    {
-        "id": 4,
-        "header": "Header4",
-        "body": "Body4"
-    },
-    {
-        "id": 5,
-        "header": "Header5",
-        "body": "Body5"
-    },
-    {
-        "id": 6,
-        "header": "Header6",
-        "body": "Body6"
-    },
-    {
-        "id": 7,
-        "header": "Header7",
-        "body": "Body7"
-    },
-    {
-        "id": 8,
-        "header": "Header8",
-        "body": "Body8"
     }
 ]
