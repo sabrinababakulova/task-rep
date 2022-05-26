@@ -20,8 +20,8 @@ const index = ({ setReadOnly, setDelClicked, isReadOnly, setAddClicked }) => {
             />
             <AddCard
                 isReadOnly={isReadOnly}
-                setAddClicked={(addClicked) => {
-                    setAddClicked(addClicked)
+                setAddClicked={(addClicked, card) => {
+                    setAddClicked(addClicked, card)
                 }}
             />
         </Flex>
