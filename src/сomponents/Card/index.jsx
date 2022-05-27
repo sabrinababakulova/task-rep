@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { Box, IconButton, ButtonGroup, Spacer } from '@chakra-ui/react'
-import { BsPencilSquare } from 'react-icons/bs'
-import { FaRegSave } from 'react-icons/fa'
-import { GrRevert } from 'react-icons/gr'
+import { Box, Spacer } from '@chakra-ui/react'
+import { v4 as uuidv4 } from 'uuid'
+
 import CardHeader from './CardHeader'
 import CardBody from './CardBody'
+import CardButton from './CardButton'
 
-const Card = ({ readOnly, data, delClicked }) => {
+const Card = ({
+    readOnly,
+    data,
+    delClicked,
+    editing,
+    newCard,
+    onClose,
+    setAddClicked,
+}) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
     const [revertHeader, setRevertHeader] = useState(header)
     const [revertBody, setRevertBody] = useState(body)
     const [boxChecked, setBoxChecked] = useState(false)
-    const [isEditing, setIsEditing] = useState(false)
+    const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
     const [toDelete, setToDelete] = useState(false)
@@ -27,11 +35,16 @@ const Card = ({ readOnly, data, delClicked }) => {
         setHeader(revertHeader)
         setBody(revertBody)
         setIsReadOnly(readOnly)
-        setIsEditing(false)
         setEditApproved(true)
+        if (readOnly) {
+            setIsEditing(false)
+        }
     }, [readOnly])
 
     const validationOnDiscard = () => {
+        if (newCard) {
+            onClose()
+        }
         setHeader(revertHeader)
         setBody(revertBody)
         setEditApproved(true)
@@ -45,6 +58,14 @@ const Card = ({ readOnly, data, delClicked }) => {
             setIsEditing(true)
             setEditApproved(false)
         } else {
+            if (newCard) {
+                setAddClicked(true, {
+                    id: uuidv4(),
+                    header: header,
+                    body: body,
+                })
+                onClose()
+            }
             setRevertHeader(header)
             setRevertBody(body)
             setIsEditing(false)
@@ -71,6 +92,7 @@ const Card = ({ readOnly, data, delClicked }) => {
                     setEditApproved(editApproved)
                 }
                 header={header}
+                boxChecked={boxChecked}
                 setBoxChecked={(boxChecked) => setBoxChecked(boxChecked)}
             />
 
@@ -81,35 +103,18 @@ const Card = ({ readOnly, data, delClicked }) => {
                 setRevertBody={(body) => setRevertBody(body)}
             />
 
-            <Spacer h="16" />
-            {isEditing && !isReadOnly ? (
-                <ButtonGroup
-                    justifyContent="space-around"
-                    w="full"
-                    size="lg"
-                    onClick={() => setBoxChecked(false)}
-                >
-                    <IconButton
-                        icon={<GrRevert size="32" />}
-                        onClick={() => validationOnDiscard()}
-                    />
-                    <IconButton
-                        isDisabled={!editApproved}
-                        icon={<FaRegSave size="32" />}
-                        onClick={() => validationOnSave()}
-                    />
-                </ButtonGroup>
-            ) : (
-                <IconButton
-                    isDisabled={isReadOnly}
-                    size="lg"
-                    icon={<BsPencilSquare size="32" />}
-                    onClick={() => {
-                        setIsEditing(true)
-                        setBoxChecked(false)
-                    }}
-                />
-            )}
+            <Spacer h="12" />
+
+            <CardButton
+                isEditing={isEditing}
+                isReadOnly={isReadOnly}
+                setBoxChecked={(boxChecked) => setBoxChecked(boxChecked)}
+                validationOnDiscard={validationOnDiscard}
+                validationOnSave={validationOnSave}
+                editApproved={editApproved}
+                readOnly={readOnly}
+                setIsEditing={(isEditing) => setIsEditing(isEditing)}
+            />
         </Box>
     )
 }

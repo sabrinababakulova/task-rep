@@ -7,14 +7,11 @@ const index = ({ cardData }) => {
     const [readOnly, setReadOnly] = useState(false)
     const [delClicked, setDelClicked] = useState(false)
     const [addClicked, setAddClicked] = useState(false)
-    const [cardCreated, setCardCreated] = useState('{}')
+    const [cardCreated, setCardCreated] = useState({})
 
     if (addClicked) {
-        console.log(cardCreated)
-        console.log(addClicked)
         cardData.push(cardCreated)
         setAddClicked(false)
-        console.log(cardData)
     }
 
     return (

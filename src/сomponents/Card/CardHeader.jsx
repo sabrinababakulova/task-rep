@@ -15,6 +15,7 @@ const CardHeader = ({
     setEditApproved,
     header,
     setBoxChecked,
+    boxChecked,
 }) => {
     return (
         <>
@@ -24,6 +25,7 @@ const CardHeader = ({
                     onChange={() => setEditApproved(true)}
                 >
                     <Input
+                        placeholder="Enter your header here"
                         variant={isEditing ? 'filled' : 'unstyled'}
                         fontSize="2xl"
                         isReadOnly={!isEditing}
@@ -38,6 +40,7 @@ const CardHeader = ({
                 </FormControl>
                 <Checkbox
                     hidden={isEditing}
+                    isChecked={boxChecked}
                     onChange={(e) => {
                         setBoxChecked(e.target.checked)
                     }}

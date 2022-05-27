@@ -1,24 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalCloseButton,
     useDisclosure,
-    Input,
-    ButtonGroup,
-    Textarea,
     Button,
+    Center,
 } from '@chakra-ui/react'
-import { v4 as uuidv4 } from 'uuid'
+import Card from '../Card'
 
 const AddCard = ({ setAddClicked, isReadOnly }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [approved, setApproved] = useState(false)
-    const [header, setHeader] = useState('')
-    const [body, setBody] = useState('')
     return (
         <>
             <Button
@@ -29,7 +23,9 @@ const AddCard = ({ setAddClicked, isReadOnly }) => {
             >
                 Add
             </Button>
+
             <Modal
+                size="xl"
                 closeOnOverlayClick={false}
                 isOpen={isOpen}
                 onClose={onClose}
@@ -37,55 +33,16 @@ const AddCard = ({ setAddClicked, isReadOnly }) => {
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Set info for card</ModalHeader>
-                    <Input
-                        m={2}
-                        w="90%"
-                        placeholder="header"
-                        value={header}
-                        onChange={(e) => {
-                            setHeader(e.target.value)
-                            e.target.value.trim().length > 0
-                                ? setApproved(true)
-                                : setApproved(false)
-                        }}
-                        isInvalid={!approved}
-                    />
+                    <Center>
+                        <Card
+                            data={{ header: '', body: '' }}
+                            newCard={true}
+                            editing={true}
+                            onClose={onClose}
+                            setAddClicked={setAddClicked}
+                        />
+                    </Center>
                     <ModalCloseButton />
-                    <Textarea
-                        m={2}
-                        w="90%"
-                        value={body}
-                        onChange={(e) => {
-                            setBody(e.target.value)
-                        }}
-                        placeholder="Body of card"
-                    />
-
-                    <ModalFooter>
-                        <ButtonGroup
-                            onClick={() => {
-                                setHeader('')
-                                setBody('')
-                                onClose()
-                            }}
-                        >
-                            <Button
-                                colorScheme="blue"
-                                mr={3}
-                                isDisabled={!approved}
-                                onClick={() => {
-                                    setAddClicked(true, {
-                                        id: uuidv4(),
-                                        header: header,
-                                        body: body,
-                                    })
-                                }}
-                            >
-                                Save
-                            </Button>
-                            <Button>Cancel</Button>
-                        </ButtonGroup>
-                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
