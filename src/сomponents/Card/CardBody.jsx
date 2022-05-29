@@ -5,7 +5,6 @@ const CardBody = ({ body, isEditing, setBody, setRevertBody }) => {
     return (
         <Textarea
             value={body}
-            placeholder="Enter your text here"
             fontSize="xl"
             variant={isEditing ? 'filled' : 'unstyled'}
             onClick={() => setRevertBody(body)}

@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, Badge } from '@chakra-ui/react'
 import Card from '../Card'
 
-const CardList = ({ cardData, readOnly, delClicked }) => {
+const CardList = ({ cardData, readOnly, setToDelete, clear }) => {
+    const [checkedCard, setCheckedCard] = useState({})
+    const [cardsToDelete, setCardsToDelete] = useState([])
+
+    useEffect(() => {
+        if (checkedCard.checked) {
+            setCardsToDelete((prevState) => [...prevState, checkedCard.card])
+        } else {
+            const cardIndex = cardsToDelete.findIndex(
+                (id) => id === checkedCard.card
+            )
+            cardsToDelete.splice(cardIndex, 1)
+        }
+    }, [checkedCard])
+
+    useEffect(() => {
+        setToDelete(cardsToDelete)
+    }, [cardsToDelete, checkedCard])
+
+    useEffect(() => {
+        setCardsToDelete([])
+    }, [clear])
+
     return (
         <Box zIndex={0}>
             <Grid
@@ -18,14 +40,21 @@ const CardList = ({ cardData, readOnly, delClicked }) => {
                     cardData
                         .slice(0)
                         .reverse()
-                        .map((eachCard) => (
-                            <Card
-                                key={eachCard.id}
-                                data={eachCard}
-                                readOnly={readOnly}
-                                delClicked={delClicked}
-                            />
-                        ))
+                        .map((eachCard) => {
+                            return (
+                                <Card
+                                    key={eachCard.id}
+                                    data={eachCard}
+                                    readOnly={readOnly}
+                                    setCheckedCard={(checked, card) => {
+                                        setCheckedCard({
+                                            card: card,
+                                            checked: checked,
+                                        })
+                                    }}
+                                />
+                            )
+                        })
                 )}
             </Grid>
         </Box>

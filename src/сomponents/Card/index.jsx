@@ -9,11 +9,11 @@ import CardButton from './CardButton'
 const Card = ({
     readOnly,
     data,
-    delClicked,
     editing,
     newCard,
     onClose,
     setAddClicked,
+    setCheckedCard,
 }) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
@@ -23,13 +23,11 @@ const Card = ({
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
-    const [toDelete, setToDelete] = useState(false)
-
     useEffect(() => {
-        if (boxChecked && !isReadOnly) {
-            setToDelete(true)
+        if (!newCard) {
+            setCheckedCard(boxChecked, data.id)
         }
-    }, [delClicked])
+    }, [boxChecked])
 
     useEffect(() => {
         setHeader(revertHeader)
@@ -59,11 +57,12 @@ const Card = ({
             setEditApproved(false)
         } else {
             if (newCard) {
-                setAddClicked(true, {
+                const createdCard = {
                     id: uuidv4(),
                     header: header,
                     body: body,
-                })
+                }
+                setAddClicked(true, createdCard)
                 onClose()
             }
             setRevertHeader(header)
@@ -72,9 +71,7 @@ const Card = ({
             setEditApproved(true)
         }
     }
-    if (boxChecked && toDelete) {
-        return null
-    }
+
     return (
         <Box
             boxShadow="base"

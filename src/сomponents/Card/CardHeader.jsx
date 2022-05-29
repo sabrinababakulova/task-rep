@@ -25,7 +25,6 @@ const CardHeader = ({
                     onChange={() => setEditApproved(true)}
                 >
                     <Input
-                        placeholder="Enter your header here"
                         variant={isEditing ? 'filled' : 'unstyled'}
                         fontSize="2xl"
                         isReadOnly={!isEditing}
@@ -38,15 +37,16 @@ const CardHeader = ({
                         </FormErrorMessage>
                     )}
                 </FormControl>
-                <Checkbox
-                    hidden={isEditing}
-                    isChecked={boxChecked}
-                    onChange={(e) => {
-                        setBoxChecked(e.target.checked)
-                    }}
-                    colorScheme="green"
-                    borderColor="gray.500"
-                ></Checkbox>
+                {!isEditing && (
+                    <Checkbox
+                        isChecked={boxChecked}
+                        onChange={(e) => {
+                            setBoxChecked(e.target.checked)
+                        }}
+                        colorScheme="green"
+                        borderColor="gray.500"
+                    />
+                )}
             </Flex>
 
             <Divider h={2} />

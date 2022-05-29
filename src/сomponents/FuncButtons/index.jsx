@@ -4,7 +4,12 @@ import Delete from './Delete'
 import AddCard from './AddCard'
 import { Flex } from '@chakra-ui/react'
 
-const index = ({ setReadOnly, setDelClicked, isReadOnly, setAddClicked }) => {
+const FuncButtons = ({
+    setReadOnly,
+    setDelClicked,
+    isReadOnly,
+    setAddClicked,
+}) => {
     return (
         <Flex justifyContent="space-around" gap={6}>
             <ReadOnly
@@ -28,4 +33,4 @@ const index = ({ setReadOnly, setDelClicked, isReadOnly, setAddClicked }) => {
     )
 }
 
-export default index
+export default FuncButtons
