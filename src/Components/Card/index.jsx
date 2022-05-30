@@ -7,8 +7,8 @@ import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 
 const Card = ({ readOnly, data, delClicked }) => {
-    const [header, setHeader] = useState(data.header)
-    const [body, setBody] = useState(data.body)
+    const [header, setHeader] = useState(data.title)
+    const [body, setBody] = useState(data.description)
     const [revertHeader, setRevertHeader] = useState(header)
     const [revertBody, setRevertBody] = useState(body)
     const [boxChecked, setBoxChecked] = useState(false)
