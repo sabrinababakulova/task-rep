@@ -1,42 +1,42 @@
 [
     {
         "id": 1,
-        "header": "Header1",
-        "body": "Body1"
+        "title": "Header1",
+        "description": "Body1"
     },
     {
         "id": 2,
-        "header": "Header2",
-        "body": "Body2"
+        "title": "Header2",
+        "description": "Body2"
     },
     {
         "id": 3,
-        "header": "Header3",
-        "body": "Body3"
+        "title": "Header3",
+        "description": "Body3"
     },
     {
         "id": 4,
-        "header": "Header4",
-        "body": "Body4"
+        "title": "Header4",
+        "description": "Body4"
     },
     {
         "id": 5,
-        "header": "Header5",
-        "body": "Body5"
+        "title": "Header5",
+        "description": "Body5"
     },
     {
         "id": 6,
-        "header": "Header6",
-        "body": "Body6"
+        "title": "Header6",
+        "description": "Body6"
     },
     {
         "id": 7,
-        "header": "Header7",
-        "body": "Body7"
+        "title": "Header7",
+        "description": "Body7"
     },
     {
         "id": 8,
-        "header": "Header8",
-        "body": "Body8"
+        "title": "Header8",
+        "description": "Body8"
     }
 ]
