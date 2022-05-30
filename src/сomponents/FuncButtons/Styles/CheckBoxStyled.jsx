@@ -53,5 +53,6 @@ export const Checkbox = ({ checked, ...props }) => (
 
 export const LabelStyled = styled.label`
     border: 2px solid teal;
+    padding: 0 4px;
     border-radius: 6px;
 `

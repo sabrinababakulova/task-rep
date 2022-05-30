@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Checkbox, LabelStyled } from './CheckBoxStyled'
+import { Checkbox, LabelStyled } from '../Styles/CheckBoxStyled'
 
 const ReadOnly = ({ setReadOnly }) => {
     const [isReadOnly, setIsReadOnly] = useState(false)

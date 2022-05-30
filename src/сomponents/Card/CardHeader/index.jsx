@@ -15,6 +15,7 @@ const CardHeader = ({
     setEditApproved,
     header,
     setBoxChecked,
+    boxChecked,
 }) => {
     return (
         <>
@@ -36,14 +37,16 @@ const CardHeader = ({
                         </FormErrorMessage>
                     )}
                 </FormControl>
-                <Checkbox
-                    hidden={isEditing}
-                    onChange={(e) => {
-                        setBoxChecked(e.target.checked)
-                    }}
-                    colorScheme="green"
-                    borderColor="gray.500"
-                ></Checkbox>
+                {!isEditing && (
+                    <Checkbox
+                        isChecked={boxChecked}
+                        onChange={(e) => {
+                            setBoxChecked(e.target.checked)
+                        }}
+                        colorScheme="green"
+                        borderColor="gray.500"
+                    />
+                )}
             </Flex>
 
             <Divider h={2} />
