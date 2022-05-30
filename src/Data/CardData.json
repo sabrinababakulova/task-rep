@@ -1,17 +1,17 @@
 [
     {
-        "header": "header1",
-        "body": "body1",
+        "title": "header1",
+        "description": "body1",
         "id": "7cd25378-c111-4a9b-8a88-a6d120f89f71"
     },
     {
-        "header": "header2",
-        "body": "body2",
+        "title": "header2",
+        "description": "body2",
         "id": "fc4ef771-1bfd-42a2-bb80-9117cbccdc76"
     },
     {
-        "header": "header3",
-        "body": "body3",
+        "title": "header3",
+        "description": "body3",
         "id": "c01c77e3-b88c-4cb4-8143-1d194efc1490"
     }
 ]
