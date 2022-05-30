@@ -1,6 +1,6 @@
 import React from 'react'
 import ReadOnly from './ReadOnly'
-import Delete from './Delete'
+import Delete from './DeleteCard'
 import AddCard from './AddCard'
 import { Flex } from '@chakra-ui/react'
 

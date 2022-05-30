@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import CardHeader from './CardHeader'
 import CardBody from './CardBody'
-import CardButton from './CardButton'
+import CardButton from './CardButtons'
 
 const Card = ({
     readOnly,
@@ -17,6 +17,7 @@ const Card = ({
 }) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
+
     const [revertHeader, setRevertHeader] = useState(header)
     const [revertBody, setRevertBody] = useState(body)
     const [boxChecked, setBoxChecked] = useState(false)

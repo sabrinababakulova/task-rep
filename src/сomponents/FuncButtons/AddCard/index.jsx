@@ -9,7 +9,7 @@ import {
     Button,
     Center,
 } from '@chakra-ui/react'
-import Card from '../Card'
+import Card from '../../Card'
 
 const AddCard = ({ setAddClicked, isReadOnly }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()

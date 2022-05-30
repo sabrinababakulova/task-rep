@@ -3,7 +3,7 @@ import Header from '../../сomponents/Header'
 import CardList from '../../сomponents/CardList'
 import FuncButtons from '../../сomponents/FuncButtons'
 
-const mainPage = ({ cardData }) => {
+const MainPage = ({ cardData }) => {
     const [readOnly, setReadOnly] = useState(false)
     const [delClicked, setDelClicked] = useState(false)
     const [addClicked, setAddClicked] = useState(false)
@@ -55,4 +55,4 @@ const mainPage = ({ cardData }) => {
     )
 }
 
-export default mainPage
+export default MainPage
