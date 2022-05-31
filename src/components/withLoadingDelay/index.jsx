@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Spinner, Box } from '@chakra-ui/react'
 
-function withLoadingDelay(Component) {
+const withLoadingDelay = (Component) => {
     function HOC(props) {
         const [loading, setLoading] = useState(true)
         useEffect(() => {
