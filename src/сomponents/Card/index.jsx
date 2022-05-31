@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 import CardButton from './CardButtons'
+import withLoadingDelay from '../withLoadingDelay'
 
 const Card = ({
     readOnly,
@@ -79,26 +80,24 @@ const Card = ({
             p="6"
             mb="4"
             w={['xs', 'sm', 'lg']}
-            bg={boxChecked ? 'gray.300' : 'gray.100'}
+            bg={boxChecked ? 'gray.300' : 'gray.50'}
             transition="0.2s linear"
         >
             <CardHeader
                 editApproved={editApproved}
                 isEditing={isEditing}
-                setHeader={(header) => setHeader(header)}
-                setEditApproved={(editApproved) =>
-                    setEditApproved(editApproved)
-                }
+                setHeader={setHeader}
+                setEditApproved={setEditApproved}
                 header={header}
                 boxChecked={boxChecked}
-                setBoxChecked={(boxChecked) => setBoxChecked(boxChecked)}
+                setBoxChecked={setBoxChecked}
             />
 
             <CardBody
                 body={body}
                 isEditing={isEditing}
-                setBody={(body) => setBody(body)}
-                setRevertBody={(body) => setRevertBody(body)}
+                setBody={setBody}
+                setRevertBody={setRevertBody}
             />
 
             <Spacer h="12" />
@@ -106,15 +105,17 @@ const Card = ({
             <CardButton
                 isEditing={isEditing}
                 isReadOnly={isReadOnly}
-                setBoxChecked={(boxChecked) => setBoxChecked(boxChecked)}
+                setBoxChecked={setBoxChecked}
                 validationOnDiscard={validationOnDiscard}
                 validationOnSave={validationOnSave}
                 editApproved={editApproved}
                 readOnly={readOnly}
-                setIsEditing={(isEditing) => setIsEditing(isEditing)}
+                setIsEditing={setIsEditing}
             />
         </Box>
     )
 }
 
-export default Card
+const CardWithLoadingDelay = withLoadingDelay(Card)
+
+export default CardWithLoadingDelay

@@ -31,12 +31,8 @@ const MainPage = ({ cardData }) => {
         <>
             <Header />
             <FuncButtons
-                setReadOnly={(readOnly) => {
-                    setReadOnly(readOnly)
-                }}
-                setDelClicked={(delClicked) => {
-                    setDelClicked(delClicked)
-                }}
+                setReadOnly={setReadOnly}
+                setDelClicked={setDelClicked}
                 setAddClicked={(addClicked, card) => {
                     setAddClicked(addClicked)
                     setCardCreated(card)
@@ -47,9 +43,7 @@ const MainPage = ({ cardData }) => {
                 cardData={cardData}
                 readOnly={readOnly}
                 clear={clear}
-                setToDelete={(ids) => {
-                    setCardIds(ids)
-                }}
+                setToDelete={setCardIds}
             />
         </>
     )
