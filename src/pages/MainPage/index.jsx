@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Header from '../../сomponents/Header'
-import CardList from '../../сomponents/CardList'
-import FuncButtons from '../../сomponents/FuncButtons'
+import Header from '../../components/Header'
+import CardList from '../../components/CardList'
+import FuncButtons from '../../components/FuncButtons'
 
 const MainPage = ({ cardData }) => {
     const [readOnly, setReadOnly] = useState(false)
