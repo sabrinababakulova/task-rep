@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Header from '../../сomponents/Header'
-import CardList from '../../сomponents/CardList'
-import FuncButtons from '../../сomponents/FuncButtons'
+import Header from '../../components/Header'
+import CardList from '../../components/CardList'
+import FuncButtons from '../../components/FuncButtons'
 
 const MainPage = ({ cardData }) => {
     const [readOnly, setReadOnly] = useState(false)
@@ -31,12 +31,8 @@ const MainPage = ({ cardData }) => {
         <>
             <Header />
             <FuncButtons
-                setReadOnly={(readOnly) => {
-                    setReadOnly(readOnly)
-                }}
-                setDelClicked={(delClicked) => {
-                    setDelClicked(delClicked)
-                }}
+                setReadOnly={setReadOnly}
+                setDelClicked={setDelClicked}
                 setAddClicked={(addClicked, card) => {
                     setAddClicked(addClicked)
                     setCardCreated(card)
@@ -47,9 +43,7 @@ const MainPage = ({ cardData }) => {
                 cardData={cardData}
                 readOnly={readOnly}
                 clear={clear}
-                setToDelete={(ids) => {
-                    setCardIds(ids)
-                }}
+                setToDelete={setCardIds}
             />
         </>
     )
