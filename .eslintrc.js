@@ -1,11 +1,12 @@
 module.exports = {
     env: {
         browser: true,
-        es6: true,
         jest: true,
         node: true,
     },
-    extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
+    extends:[ "eslint:recommended",
+   "prettier"
+],
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
@@ -21,7 +22,6 @@ module.exports = {
     plugins: ['react', 'prettier'],
     rules: {
         complexity: ['error', 10],
-        quotes: ['error', 'single'],
         'react/destructuring-assignment': [
             1,
             'always',

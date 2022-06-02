@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Spacer } from '@chakra-ui/react'
 import { v4 as uuidv4 } from 'uuid'
-
+import PropTypes from 'prop-types'; 
 import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 import CardButton from './CardButtons'
@@ -117,5 +117,15 @@ const Card = ({
 }
 
 const CardWithLoadingDelay = withLoadingDelay(Card)
+
+Card.propTypes={
+    readOnly: PropTypes.bool,
+    data: PropTypes.object,
+    editing: PropTypes.bool,
+    newCard: PropTypes.bool,
+    onClose: PropTypes.func,
+    setAddClicked: PropTypes.func,
+    setCheckedCard: PropTypes.func,
+}
 
 export default CardWithLoadingDelay

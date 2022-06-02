@@ -6,7 +6,7 @@ const withLoadingDelay = (Component) => (props) => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 2000)
+        }, 1000)
     }, [])
 
     return loading ? (
@@ -17,4 +17,5 @@ const withLoadingDelay = (Component) => (props) => {
         <Component {...props} />
     )
 }
+
 export default withLoadingDelay
