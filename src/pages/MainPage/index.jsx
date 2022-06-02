@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import CardList from '../../components/CardList'
 import FuncButtons from '../../components/FuncButtons'
+import { useCardData } from '../../App'
 
 const MainPage = ({ cardData }) => {
     const [readOnly, setReadOnly] = useState(false)
@@ -9,23 +10,20 @@ const MainPage = ({ cardData }) => {
     const [addClicked, setAddClicked] = useState(false)
     const [cardCreated, setCardCreated] = useState({})
     const [cardIds, setCardIds] = useState([])
-    const [clear, setClear] = useState(false)
+    const [clearTempArr, setClearTempArr] = useState(false)
+    const { removeCard, addCard } = useCardData()
 
     if (delClicked) {
-        cardIds.forEach((id) => {
-            const cardIndex = cardData.findIndex((card) => card.id === id)
-            cardData.splice(cardIndex, 1)
-        })
-        setClear(!clear)
+        removeCard(cardIds)
+        setClearTempArr(!clearTempArr)
+        setCardIds([])
         setDelClicked(false)
     }
+
     if (addClicked) {
-        cardData.push(cardCreated)
+        addCard(cardCreated)
         setAddClicked(false)
     }
-    useEffect(() => {
-        setCardIds([])
-    }, [clear])
 
     return (
         <>
@@ -42,7 +40,7 @@ const MainPage = ({ cardData }) => {
             <CardList
                 cardData={cardData}
                 readOnly={readOnly}
-                clear={clear}
+                clearTempArr={clearTempArr}
                 setToDelete={setCardIds}
             />
         </>

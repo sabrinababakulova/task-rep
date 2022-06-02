@@ -3,8 +3,7 @@ import { ButtonGroup, IconButton } from '@chakra-ui/react'
 import { BsPencilSquare } from 'react-icons/bs'
 import { FaRegSave } from 'react-icons/fa'
 import { GrRevert } from 'react-icons/gr'
-import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types'
 
 const CardButton = ({
     isEditing,

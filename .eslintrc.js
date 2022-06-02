@@ -4,14 +4,12 @@ module.exports = {
         jest: true,
         node: true,
     },
-    extends:[ "eslint:recommended",
-   "prettier"
-],
+    extends: ['eslint:recommended', 'prettier'],
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
     },
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
     parserOptions: {
         ecmaFeatures: {
             jsx: true,

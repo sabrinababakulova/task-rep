@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const CheckboxContainer = styled.div`
     display: inline-block;
@@ -52,7 +52,7 @@ export const Checkbox = ({ checked, ...props }) => (
     </CheckboxContainer>
 )
 
-Checkbox.propTypes={
+Checkbox.propTypes = {
     checked: PropTypes.bool,
 }
 

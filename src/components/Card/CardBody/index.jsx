@@ -1,6 +1,6 @@
 import React from 'react'
 import { Textarea } from '@chakra-ui/react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const CardBody = ({ body, isEditing, setBody, setRevertBody }) => {
     return (
@@ -15,12 +15,11 @@ const CardBody = ({ body, isEditing, setBody, setRevertBody }) => {
     )
 }
 
-CardBody.propTypes={
+CardBody.propTypes = {
     body: PropTypes.string.isRequired,
     isEditing: PropTypes.bool,
     setBody: PropTypes.func.isRequired,
-    setRevertBody: PropTypes.func.isRequired
-
+    setRevertBody: PropTypes.func.isRequired,
 }
 
 export default CardBody

@@ -7,7 +7,7 @@ import {
     Divider,
     FormErrorMessage,
 } from '@chakra-ui/react'
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types'
 
 const CardHeader = ({
     editApproved,
@@ -55,7 +55,7 @@ const CardHeader = ({
     )
 }
 
-CardHeader.propTypes={
+CardHeader.propTypes = {
     editApproved: PropTypes.bool,
     isEditing: PropTypes.bool,
     setHeader: PropTypes.func.isRequired,

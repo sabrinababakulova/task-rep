@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, Badge } from '@chakra-ui/react'
 import Card from '../Card'
-import PropTypes from 'prop-types';
-import { UserContext } from '../../App';
-const CardList = ({ cardData, readOnly, setToDelete, clear }) => {
-    const [checkedCard, setCheckedCard] = useState({})
+import PropTypes from 'prop-types'
+import { useCardData } from '../../App'
+
+const CardList = ({ cardData, readOnly, setToDelete, clearTempArr }) => {
+    const { checkedCard, setDataDisplay } = useCardData()
     const [cardsToDelete, setCardsToDelete] = useState([])
-    
+    setDataDisplay(cardData)
     useEffect(() => {
         if (checkedCard.checked) {
             setCardsToDelete((prevState) => [...prevState, checkedCard.card])
@@ -24,14 +25,7 @@ const CardList = ({ cardData, readOnly, setToDelete, clear }) => {
 
     useEffect(() => {
         setCardsToDelete([])
-    }, [clear])
-
-    const updateArray = ()=>{
-        const {setDataDisplay}= useContext(UserContext)
-        setDataDisplay(cardData)
-    }
-    
-    updateArray();
+    }, [clearTempArr])
 
     return (
         <Box zIndex={0}>
@@ -54,12 +48,6 @@ const CardList = ({ cardData, readOnly, setToDelete, clear }) => {
                                     key={eachCard.id}
                                     data={eachCard}
                                     readOnly={readOnly}
-                                    setCheckedCard={(checked, card) => {
-                                        setCheckedCard({
-                                            card: card,
-                                            checked: checked,
-                                        })
-                                    }}
                                 />
                             )
                         })
@@ -69,11 +57,11 @@ const CardList = ({ cardData, readOnly, setToDelete, clear }) => {
     )
 }
 
-CardList.propTypes={
+CardList.propTypes = {
     cardData: PropTypes.array.isRequired,
     readOnly: PropTypes.bool,
     setToDelete: PropTypes.func,
-    clear: PropTypes.bool
+    clearTempArr: PropTypes.bool,
 }
 
 export default CardList

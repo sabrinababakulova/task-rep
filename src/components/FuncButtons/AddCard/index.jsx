@@ -10,7 +10,7 @@ import {
     Center,
 } from '@chakra-ui/react'
 import Card from '../../Card'
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types'
 
 const AddCard = ({ setAddClicked, isReadOnly }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,9 +50,9 @@ const AddCard = ({ setAddClicked, isReadOnly }) => {
     )
 }
 
-AddCard.propTypes={
+AddCard.propTypes = {
     setAddClicked: PropTypes.func.isRequired,
-    isReadOnly: PropTypes.bool
+    isReadOnly: PropTypes.bool,
 }
 
 export default AddCard
