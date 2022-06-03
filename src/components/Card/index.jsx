@@ -6,7 +6,7 @@ import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 import CardButton from './CardButtons'
 import withLoadingDelay from '../withLoadingDelay'
-import { useCardData } from '../../App'
+import { useCardData } from '../../contextProvider'
 const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)

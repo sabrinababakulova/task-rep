@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, Flex, Badge } from '@chakra-ui/react'
-import { useCardData } from '../../App'
+import { useCardData } from '../../contextProvider'
 
 const Header = () => {
     const { getNumberOfCards } = useCardData()

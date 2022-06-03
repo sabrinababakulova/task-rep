@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Box, Grid, Badge } from '@chakra-ui/react'
 import Card from '../Card'
 import PropTypes from 'prop-types'
-import { useCardData } from '../../App'
+import { useCardData } from '../../contextProvider'
 
 const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
-    const { checkedCard, dataToDisplay } = useCardData()
+    const { checkedCard, allCards, getNumberOfCards } = useCardData()
     const [cardsToDelete, setCardsToDelete] = useState([])
     useEffect(() => {
         if (checkedCard.checked) {
@@ -32,12 +32,12 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
                 gap={8}
             >
-                {dataToDisplay.length === 0 ? (
+                {getNumberOfCards === 0 ? (
                     <Badge colorScheme="red" mt="4" fontSize="1em">
                         You dont have any cards
                     </Badge>
                 ) : (
-                    dataToDisplay
+                    allCards
                         .slice(0)
                         .reverse()
                         .map((eachCard) => {

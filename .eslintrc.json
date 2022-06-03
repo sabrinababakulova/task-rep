@@ -1,5 +1,4 @@
 {
-    "parser": "@babel/eslint-parser",
     "settings": {
         "react": {
             "version": "detect"
@@ -11,13 +10,14 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "standard",
         "plugin:react/jsx-runtime",
-        "plugin:testing-library/react",
-        "plugin:jest/all"
+        "plugin:testing-library/react"
     ],
     "parserOptions": {
-        "sourceType": "module"
-    },
+    "ecmaVersion": 12,
+    "parser": "@babel/eslint-parser",
+    "requireConfigFile": false,
+    "sourceType": "module"
+  },
     "rules": {}
 }
