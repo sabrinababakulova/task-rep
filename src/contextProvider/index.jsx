@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import cardData from '../data/CardData.json'
 import PropTypes from 'prop-types'
 
-
 const cardDataContext = React.createContext()
 
 export const CardDataProvider = ({ children }) => {
@@ -17,9 +16,7 @@ export const CardDataProvider = ({ children }) => {
         },
         removeCard: (cardIds) => {
             cardIds.forEach((id) => {
-                const cardIndex = allCards.findIndex(
-                    (card) => card.id === id
-                )
+                const cardIndex = allCards.findIndex((card) => card.id === id)
                 allCards.splice(cardIndex, 1)
             })
         },
@@ -35,7 +32,7 @@ export const CardDataProvider = ({ children }) => {
     )
 }
 
-CardDataProvider.propTypes={
+CardDataProvider.propTypes = {
     children: PropTypes.node.isRequired,
 }
 export const useCardData = () => useContext(cardDataContext)
