@@ -7,11 +7,9 @@ import { useCardData } from '../../contextProvider'
 const MainPage = () => {
     const [readOnly, setReadOnly] = useState(false)
     const [delClicked, setDelClicked] = useState(false)
-    const [addClicked, setAddClicked] = useState(false)
-    const [cardCreated, setCardCreated] = useState({})
     const [cardIds, setCardIds] = useState([])
     const [clearTempArr, setClearTempArr] = useState(false)
-    const { removeCard, addCard } = useCardData()
+    const { removeCard } = useCardData()
 
     if (delClicked) {
         removeCard(cardIds)
@@ -20,21 +18,12 @@ const MainPage = () => {
         setDelClicked(false)
     }
 
-    if (addClicked) {
-        addCard(cardCreated)
-        setAddClicked(false)
-    }
-
     return (
         <>
             <Header />
             <FuncButtons
                 setReadOnly={setReadOnly}
                 setDelClicked={setDelClicked}
-                setAddClicked={(addClicked, card) => {
-                    setAddClicked(addClicked)
-                    setCardCreated(card)
-                }}
                 isReadOnly={readOnly}
             />
             <CardList
