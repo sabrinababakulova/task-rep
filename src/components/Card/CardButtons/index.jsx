@@ -3,6 +3,7 @@ import { ButtonGroup, IconButton } from '@chakra-ui/react'
 import { BsPencilSquare } from 'react-icons/bs'
 import { FaRegSave } from 'react-icons/fa'
 import { GrRevert } from 'react-icons/gr'
+import PropTypes from 'prop-types'
 
 const CardButton = ({
     isEditing,
@@ -49,4 +50,16 @@ const CardButton = ({
         )
     }
 }
+
+CardButton.propTypes = {
+    isEditing: PropTypes.bool,
+    isReadOnly: PropTypes.bool,
+    setBoxChecked: PropTypes.func,
+    validationOnDiscard: PropTypes.func.isRequired,
+    validationOnSave: PropTypes.func.isRequired,
+    editApproved: PropTypes.bool,
+    readOnly: PropTypes.bool,
+    setIsEditing: PropTypes.func.isRequired,
+}
+
 export default CardButton

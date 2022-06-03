@@ -3,6 +3,7 @@ import ReadOnly from './ReadOnly'
 import Delete from './DeleteCard'
 import AddCard from './AddCard'
 import { Flex } from '@chakra-ui/react'
+import PropTypes from 'prop-types'
 
 const FuncButtons = ({
     setReadOnly,
@@ -31,6 +32,13 @@ const FuncButtons = ({
             />
         </Flex>
     )
+}
+
+FuncButtons.propTypes = {
+    setReadOnly: PropTypes.func.isRequired,
+    setDelClicked: PropTypes.func.isRequired,
+    isReadOnly: PropTypes.bool,
+    setAddClicked: PropTypes.func.isRequired,
 }
 
 export default FuncButtons

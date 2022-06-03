@@ -1,33 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Spacer } from '@chakra-ui/react'
 import { v4 as uuidv4 } from 'uuid'
-
+import PropTypes from 'prop-types'
 import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 import CardButton from './CardButtons'
 import withLoadingDelay from '../withLoadingDelay'
-
-const Card = ({
-    readOnly,
-    data,
-    editing,
-    newCard,
-    onClose,
-    setAddClicked,
-    setCheckedCard,
-}) => {
+import { useCardData } from '../../contextProvider'
+const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
-
     const [revertHeader, setRevertHeader] = useState(header)
     const [revertBody, setRevertBody] = useState(body)
     const [boxChecked, setBoxChecked] = useState(false)
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
+    const { setCheckedCard } = useCardData()
     useEffect(() => {
         if (!newCard) {
-            setCheckedCard(boxChecked, data.id)
+            const checkedCard = { checked: boxChecked, card: data.id }
+            setCheckedCard(checkedCard)
         }
     }, [boxChecked])
 
@@ -117,5 +110,14 @@ const Card = ({
 }
 
 const CardWithLoadingDelay = withLoadingDelay(Card)
+
+Card.propTypes = {
+    readOnly: PropTypes.bool,
+    data: PropTypes.object,
+    editing: PropTypes.bool,
+    newCard: PropTypes.bool,
+    onClose: PropTypes.func,
+    setAddClicked: PropTypes.func,
+}
 
 export default CardWithLoadingDelay

@@ -1,6 +1,9 @@
 import React from 'react'
-import { Text, Flex } from '@chakra-ui/react'
+import { Text, Flex, Badge } from '@chakra-ui/react'
+import { useCardData } from '../../contextProvider'
+
 const Header = () => {
+    const { getNumberOfCards } = useCardData()
     return (
         <Flex
             pos="fixed"
@@ -11,10 +14,9 @@ const Header = () => {
             zIndex="1"
             bg="white"
             alignItems="center"
-            gap={['10', '20', '40']}
-            justifyContent="center"
+            justifyContent="space-around"
             _before={{
-                content: `""`,
+                content: `''`,
                 position: 'absolute',
                 width: 'full',
                 height: 'full',
@@ -22,10 +24,12 @@ const Header = () => {
                 boxShadow: 'lg',
             }}
         >
-            <Text>header1</Text>
-            <Text>header2</Text>
-            <Text>header3</Text>
-            <Text>header4</Text>
+            <Text fontWeight="bold" align="center">
+                Number Of Cards:
+                <Badge ml="2" fontSize="1rem" colorScheme="facebook">
+                    {getNumberOfCards()}
+                </Badge>
+            </Text>
         </Flex>
     )
 }
