@@ -3,7 +3,7 @@ import { Text, Flex, Badge } from '@chakra-ui/react'
 import { useCardData } from '../../App'
 
 const Header = () => {
-    const { numberOfCards } = useCardData()
+    const { getNumberOfCards } = useCardData()
     return (
         <Flex
             pos="fixed"
@@ -24,13 +24,12 @@ const Header = () => {
                 boxShadow: 'lg',
             }}
         >
-            <Text>header1</Text>
-            <Text>header2</Text>
-            <Badge variant="outline" fontSize="1rem">
-                {numberOfCards} items
-            </Badge>
-            <Text>header3</Text>
-            <Text>header4</Text>
+            <Text fontWeight="bold" align="center">
+                Number Of Cards:
+                <Badge ml="2" fontSize="1rem" colorScheme="facebook">
+                    {getNumberOfCards()}
+                </Badge>
+            </Text>
         </Flex>
     )
 }

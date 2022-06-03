@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { useCardData } from '../../App'
 
 const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
-    const { checkedCard, dataDisplay, setNumberOfCards } = useCardData()
+    const { checkedCard, dataToDisplay } = useCardData()
     const [cardsToDelete, setCardsToDelete] = useState([])
     useEffect(() => {
         if (checkedCard.checked) {
@@ -22,7 +22,6 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
     }, [cardsToDelete, checkedCard])
 
     useEffect(() => {
-        setNumberOfCards(dataDisplay.length)
         setCardsToDelete([])
     }, [clearTempArr])
 
@@ -33,12 +32,12 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
                 gap={8}
             >
-                {dataDisplay.length === 0 ? (
+                {dataToDisplay.length === 0 ? (
                     <Badge colorScheme="red" mt="4" fontSize="1em">
                         You dont have any cards
                     </Badge>
                 ) : (
-                    dataDisplay
+                    dataToDisplay
                         .slice(0)
                         .reverse()
                         .map((eachCard) => {

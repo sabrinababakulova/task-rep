@@ -5,23 +5,21 @@ import cardData from './data/CardData.json'
 
 const cardDataContext = React.createContext()
 
-const CardDataProvider = ({ children }) => {
-    const [dataDisplay] = useState(cardData)
+export const CardDataProvider = ({ children }) => {
+    const [dataToDisplay] = useState(cardData)
     const [checkedCard, setCheckedCard] = useState({})
-    const [numberOfCards, setNumberOfCards] = useState(dataDisplay.length)
     const value = {
-        dataDisplay,
-        numberOfCards,
-        setNumberOfCards,
+        dataToDisplay,
+        getNumberOfCards: () => dataToDisplay.length,
         addCard: (cardCreated) => {
-            dataDisplay.push(cardCreated)
+            dataToDisplay.push(cardCreated)
         },
         removeCard: (cardIds) => {
             cardIds.forEach((id) => {
-                const cardIndex = dataDisplay.findIndex(
+                const cardIndex = dataToDisplay.findIndex(
                     (card) => card.id === id
                 )
-                dataDisplay.splice(cardIndex, 1)
+                dataToDisplay.splice(cardIndex, 1)
             })
         },
         checkedCard,
@@ -40,11 +38,9 @@ export const useCardData = () => useContext(cardDataContext)
 
 const App = () => {
     return (
-        <CardDataProvider>
-            <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
-                <MainPage />
-            </Box>
-        </CardDataProvider>
+        <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
+            <MainPage />
+        </Box>
     )
 }
 
