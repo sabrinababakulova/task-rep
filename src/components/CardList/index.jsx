@@ -4,10 +4,9 @@ import Card from '../Card'
 import PropTypes from 'prop-types'
 import { useCardData } from '../../App'
 
-const CardList = ({ cardData, readOnly, setToDelete, clearTempArr }) => {
-    const { checkedCard, setDataDisplay } = useCardData()
+const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
+    const { checkedCard, dataDisplay, setNumberOfCards } = useCardData()
     const [cardsToDelete, setCardsToDelete] = useState([])
-    setDataDisplay(cardData)
     useEffect(() => {
         if (checkedCard.checked) {
             setCardsToDelete((prevState) => [...prevState, checkedCard.card])
@@ -18,12 +17,12 @@ const CardList = ({ cardData, readOnly, setToDelete, clearTempArr }) => {
             cardsToDelete.splice(cardIndex, 1)
         }
     }, [checkedCard])
-
     useEffect(() => {
         setToDelete(cardsToDelete)
     }, [cardsToDelete, checkedCard])
 
     useEffect(() => {
+        setNumberOfCards(dataDisplay.length)
         setCardsToDelete([])
     }, [clearTempArr])
 
@@ -34,12 +33,12 @@ const CardList = ({ cardData, readOnly, setToDelete, clearTempArr }) => {
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
                 gap={8}
             >
-                {cardData.length === 0 ? (
+                {dataDisplay.length === 0 ? (
                     <Badge colorScheme="red" mt="4" fontSize="1em">
                         You dont have any cards
                     </Badge>
                 ) : (
-                    cardData
+                    dataDisplay
                         .slice(0)
                         .reverse()
                         .map((eachCard) => {
@@ -58,7 +57,6 @@ const CardList = ({ cardData, readOnly, setToDelete, clearTempArr }) => {
 }
 
 CardList.propTypes = {
-    cardData: PropTypes.array.isRequired,
     readOnly: PropTypes.bool,
     setToDelete: PropTypes.func,
     clearTempArr: PropTypes.bool,

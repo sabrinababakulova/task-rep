@@ -16,7 +16,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
-    const { setCheckedCard } = useCardData()
+    const { setCheckedCard, setNumberOfCards } = useCardData()
     useEffect(() => {
         if (!newCard) {
             const checkedCard = { checked: boxChecked, card: data.id }
@@ -57,6 +57,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
                     header: header,
                     body: body,
                 }
+                setNumberOfCards((prevState) => prevState + 1)
                 setAddClicked(true, createdCard)
                 onClose()
             }

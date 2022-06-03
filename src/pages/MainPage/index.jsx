@@ -4,7 +4,7 @@ import CardList from '../../components/CardList'
 import FuncButtons from '../../components/FuncButtons'
 import { useCardData } from '../../App'
 
-const MainPage = ({ cardData }) => {
+const MainPage = () => {
     const [readOnly, setReadOnly] = useState(false)
     const [delClicked, setDelClicked] = useState(false)
     const [addClicked, setAddClicked] = useState(false)
@@ -38,7 +38,6 @@ const MainPage = ({ cardData }) => {
                 isReadOnly={readOnly}
             />
             <CardList
-                cardData={cardData}
                 readOnly={readOnly}
                 clearTempArr={clearTempArr}
                 setToDelete={setCardIds}

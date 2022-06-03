@@ -1,23 +1,27 @@
 import MainPage from './pages/MainPage'
 import { Box } from '@chakra-ui/react'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import cardData from './data/CardData.json'
-import PropTypes from 'prop-types'
 
 const cardDataContext = React.createContext()
 
 const CardDataProvider = ({ children }) => {
-    const [checkedCard, setCheckedCard] = React.useState({})
+    const [dataDisplay] = useState(cardData)
+    const [checkedCard, setCheckedCard] = useState({})
+    const [numberOfCards, setNumberOfCards] = useState(dataDisplay.length)
     const value = {
-        dataDisplay: cardData,
-        setDataDisplay: () => {},
+        dataDisplay,
+        numberOfCards,
+        setNumberOfCards,
         addCard: (cardCreated) => {
-            cardData.push(cardCreated)
+            dataDisplay.push(cardCreated)
         },
         removeCard: (cardIds) => {
             cardIds.forEach((id) => {
-                const cardIndex = cardData.findIndex((card) => card.id === id)
-                cardData.splice(cardIndex, 1)
+                const cardIndex = dataDisplay.findIndex(
+                    (card) => card.id === id
+                )
+                dataDisplay.splice(cardIndex, 1)
             })
         },
         checkedCard,
@@ -38,14 +42,10 @@ const App = () => {
     return (
         <CardDataProvider>
             <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
-                <MainPage cardData={cardData} />
+                <MainPage />
             </Box>
         </CardDataProvider>
     )
-}
-
-App.propTypes = {
-    cardData: PropTypes.array,
 }
 
 export default App
