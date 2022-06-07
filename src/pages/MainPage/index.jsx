@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from '../../components/Header'
 import CardList from '../../components/CardList'
 import FuncButtons from '../../components/FuncButtons'
 import { useCardData } from '../../contextProvider'
@@ -20,7 +19,6 @@ const MainPage = () => {
 
     return (
         <>
-            <Header />
             <FuncButtons
                 setReadOnly={setReadOnly}
                 setDelClicked={setDelClicked}

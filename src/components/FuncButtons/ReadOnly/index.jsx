@@ -8,9 +8,10 @@ const ReadOnly = ({ setReadOnly }) => {
         <LabelStyled>
             <Checkbox
                 checked={isReadOnly}
-                onChange={() => {
+                onChange={(e) => {
                     setReadOnly(!isReadOnly)
                     setIsReadOnly(!isReadOnly)
+                    console.log(e)
                 }}
             />
             <span>Read Only</span>

@@ -14,18 +14,16 @@ export const CardDataProvider = ({ children }) => {
                 'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json'
             )
             .then((res) => {
-                res.data
-                    .splice(0, 15)
-                    .map((eachItem) =>
-                        setAllCards((prevState) => [
-                            ...prevState,
-                            {
-                                header: eachItem.Name,
-                                body: eachItem.About,
-                                id: eachItem.Number,
-                            },
-                        ])
-                    )
+                res.data.splice(0, 15).map((eachItem) =>
+                    setAllCards((prevState) => [
+                        ...prevState,
+                        {
+                            header: eachItem.Name,
+                            body: eachItem.About,
+                            id: eachItem.Number,
+                        },
+                    ])
+                )
             })
     }
     useEffect(() => {
