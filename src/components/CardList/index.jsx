@@ -14,7 +14,9 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
             const cardIndex = cardsToDelete.findIndex(
                 (id) => id === checkedCard.card
             )
-            cardsToDelete.splice(cardIndex, 1)
+            if (cardIndex !== -1) {
+                cardsToDelete.splice(cardIndex, 1)
+            }
         }
     }, [checkedCard])
     useEffect(() => {
