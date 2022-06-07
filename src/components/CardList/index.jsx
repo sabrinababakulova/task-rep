@@ -10,14 +10,18 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
     useEffect(() => {
         if (checkedCard.checked) {
             setCardsToDelete((prevState) => [...prevState, checkedCard.card])
+            return
         } else {
             const cardIndex = cardsToDelete.findIndex(
                 (id) => id === checkedCard.card
             )
-            cardsToDelete.splice(cardIndex, 1)
+            if (cardIndex > -1) {
+                cardsToDelete.splice(cardIndex, 1)
+            }
         }
     }, [checkedCard])
     useEffect(() => {
+        console.log(cardsToDelete)
         setToDelete(cardsToDelete)
     }, [cardsToDelete, checkedCard])
 
