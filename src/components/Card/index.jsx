@@ -117,7 +117,6 @@ Card.propTypes = {
     editing: PropTypes.bool,
     newCard: PropTypes.bool,
     onClose: PropTypes.func,
-    onAddClicked: PropTypes.func,
 }
 
 export default CardWithLoadingDelay
