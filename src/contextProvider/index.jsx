@@ -1,18 +1,41 @@
-import React, { useContext, useState } from 'react'
-import cardData from '../data/CardData.json'
+import React, { useContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 const cardDataContext = React.createContext()
 
 export const CardDataProvider = ({ children }) => {
-    // no setAllCards because it renders while mainpage is rendering
-    const [allCards] = useState(cardData)
+    const [allCards, setAllCards] = useState([])
     const [checkedCard, setCheckedCard] = useState({})
+
+    const getData = () => {
+        axios
+            .get(
+                'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json'
+            )
+            .then((res) => {
+                res.data
+                    .splice(0, 15)
+                    .map((eachItem) =>
+                        setAllCards((prevState) => [
+                            ...prevState,
+                            {
+                                header: eachItem.Name,
+                                body: eachItem.About,
+                                id: eachItem.Number,
+                            },
+                        ])
+                    )
+            })
+    }
+    useEffect(() => {
+        getData()
+    }, [])
     const value = {
         allCards,
         getNumberOfCards: () => allCards.length,
         addCard: (cardCreated) => {
-            allCards.push(cardCreated)
+            setAllCards((prevState) => [...prevState, cardCreated])
         },
         removeCard: (cardIds) => {
             cardIds.forEach((id) => {

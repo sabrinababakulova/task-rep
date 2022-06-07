@@ -19,5 +19,7 @@
         "requireConfigFile": false,
         "sourceType": "module"
     },
-    "rules": {}
+    "rules": {
+        "react/display-name": "off"
+    }
 }

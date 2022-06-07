@@ -7,6 +7,9 @@ const CardBody = ({ body, isEditing, setBody, setRevertBody }) => {
         <Textarea
             value={body}
             fontSize="xl"
+            minH="150px"
+            size="xl"
+            overflow="hidden"
             variant={isEditing ? 'filled' : 'unstyled'}
             onClick={() => setRevertBody(body)}
             isReadOnly={!isEditing}

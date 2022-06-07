@@ -12,7 +12,7 @@ import {
 import Card from '../../Card'
 import PropTypes from 'prop-types'
 
-const AddCard = ({ setAddClicked, isReadOnly }) => {
+const AddCard = ({ isReadOnly }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
@@ -40,7 +40,6 @@ const AddCard = ({ setAddClicked, isReadOnly }) => {
                             newCard={true}
                             editing={true}
                             onClose={onClose}
-                            setAddClicked={setAddClicked}
                         />
                     </Center>
                     <ModalCloseButton />
@@ -51,7 +50,6 @@ const AddCard = ({ setAddClicked, isReadOnly }) => {
 }
 
 AddCard.propTypes = {
-    setAddClicked: PropTypes.func.isRequired,
     isReadOnly: PropTypes.bool,
 }
 

@@ -7,7 +7,7 @@ import CardBody from './CardBody'
 import CardButton from './CardButtons'
 import withLoadingDelay from '../withLoadingDelay'
 import { useCardData } from '../../contextProvider'
-const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
+const Card = ({ readOnly, data, editing, newCard, onClose }) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
     const [revertHeader, setRevertHeader] = useState(header)
@@ -16,7 +16,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
-    const { setCheckedCard } = useCardData()
+    const { setCheckedCard, addCard } = useCardData()
     useEffect(() => {
         if (!newCard) {
             const checkedCard = { checked: boxChecked, card: data.id }
@@ -57,7 +57,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose, setAddClicked }) => {
                     header: header,
                     body: body,
                 }
-                setAddClicked(true, createdCard)
+                addCard(createdCard)
                 onClose()
             }
             setRevertHeader(header)
@@ -117,7 +117,6 @@ Card.propTypes = {
     editing: PropTypes.bool,
     newCard: PropTypes.bool,
     onClose: PropTypes.func,
-    setAddClicked: PropTypes.func,
 }
 
 export default CardWithLoadingDelay
