@@ -45,6 +45,10 @@ export const CardDataProvider = ({ children }) => {
         setCheckedCard: (card) => {
             setCheckedCard(card)
         },
+        editCard: (cardId, cardEdited) => {
+            const cardIndex = allCards.findIndex((card) => card.id === cardId)
+            allCards[cardIndex] = cardEdited
+        }
     }
     return (
         <cardDataContext.Provider value={value}>
