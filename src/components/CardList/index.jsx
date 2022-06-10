@@ -42,14 +42,13 @@ const CardList = ({ readOnly, setToDelete, delClicked }) => {
                     allCards
                         .slice(0)
                         .reverse()
-                        .map((eachCard) =>  (
-                                <Card
-                                    key={eachCard.id}
-                                    data={eachCard}
-                                    readOnly={readOnly}
-                                />
-                            )
-                        )
+                        .map((eachCard) => (
+                            <Card
+                                key={eachCard.id}
+                                data={eachCard}
+                                readOnly={readOnly}
+                            />
+                        ))
                 )}
             </Grid>
         </Box>

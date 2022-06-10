@@ -9,7 +9,7 @@ const MainPage = () => {
     const [cardIds, setCardIds] = useState([])
     const { removeCard } = useCardData()
 
-    useEffect(()=>{
+    useEffect(() => {
         removeCard(cardIds)
         setCardIds([])
     }, [delClicked])
