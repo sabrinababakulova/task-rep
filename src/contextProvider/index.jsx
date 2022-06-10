@@ -14,16 +14,18 @@ export const CardDataProvider = ({ children }) => {
                 'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json'
             )
             .then((res) => {
-                res.data.splice(0, 15).map((eachItem) =>
-                    setAllCards((prevState) => [
-                        ...prevState,
-                        {
-                            header: eachItem.Name,
-                            body: eachItem.About,
-                            id: eachItem.Number,
-                        },
-                    ])
-                )
+                res.data
+                    .splice(0, 15)
+                    .map((eachItem) =>
+                        setAllCards((prevState) => [
+                            ...prevState,
+                            {
+                                header: eachItem.Name,
+                                body: eachItem.About,
+                                id: eachItem.Number,
+                            },
+                        ])
+                    )
             })
     }
     useEffect(() => {
@@ -38,16 +40,22 @@ export const CardDataProvider = ({ children }) => {
         removeCard: (cardIds) => {
             cardIds.forEach((id) => {
                 const cardIndex = allCards.findIndex((card) => card.id === id)
-                allCards.splice(cardIndex, 1)
+                 setAllCards((prevState) => {
+                    prevState.splice(cardIndex, 1)
+                    return [...prevState]
+                })
             })
         },
         checkedCard,
         setCheckedCard: (card) => {
             setCheckedCard(card)
         },
-        editCard: (cardId, cardEdited) => {
+         editCard: (cardId, cardEdited) => {
             const cardIndex = allCards.findIndex((card) => card.id === cardId)
-            allCards[cardIndex] = cardEdited
+            setAllCards((prevState) => {
+                prevState[cardIndex] = cardEdited
+                return [...prevState]
+            })
         }
     }
     return (

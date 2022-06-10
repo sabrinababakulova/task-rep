@@ -29,15 +29,11 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
         setBody(revertBody)
         setIsReadOnly(readOnly)
         setEditApproved(true)
-        if (readOnly) {
-            setIsEditing(false)
-        }
+        readOnly && setIsEditing(false)
     }, [readOnly])
 
     const validationOnDiscard = () => {
-        if (newCard) {
-            onClose()
-        }
+        newCard && onClose()
         setHeader(revertHeader)
         setBody(revertBody)
         setEditApproved(true)

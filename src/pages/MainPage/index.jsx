@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CardList from '../../components/CardList'
 import FuncButtons from '../../components/FuncButtons'
 import { useCardData } from '../../contextProvider'
@@ -7,15 +7,12 @@ const MainPage = () => {
     const [readOnly, setReadOnly] = useState(false)
     const [delClicked, setDelClicked] = useState(false)
     const [cardIds, setCardIds] = useState([])
-    const [clearTempArr, setClearTempArr] = useState(false)
     const { removeCard } = useCardData()
 
-    if (delClicked) {
+    useEffect(()=>{
         removeCard(cardIds)
-        setClearTempArr(!clearTempArr)
         setCardIds([])
-        setDelClicked(false)
-    }
+    }, [delClicked])
 
     return (
         <>
@@ -26,7 +23,7 @@ const MainPage = () => {
             />
             <CardList
                 readOnly={readOnly}
-                clearTempArr={clearTempArr}
+                delClicked={delClicked}
                 setToDelete={setCardIds}
             />
         </>
