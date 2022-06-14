@@ -4,7 +4,7 @@ import Card from '../Card'
 import PropTypes from 'prop-types'
 import { useCardData } from '../../contextProvider'
 
-const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
+const CardList = ({ readOnly, setToDelete, delClicked }) => {
     const { checkedCard, allCards, getNumberOfCards } = useCardData()
     const [cardsToDelete, setCardsToDelete] = useState([])
     useEffect(() => {
@@ -14,18 +14,21 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
             const cardIndex = cardsToDelete.findIndex(
                 (id) => id === checkedCard.card
             )
-            if (cardIndex !== -1) {
-                cardsToDelete.splice(cardIndex, 1)
-            }
+            cardIndex !== -1 &&
+                setCardsToDelete((prevState) => {
+                    prevState.splice(cardIndex, 1)
+                    return [...prevState]
+                })
         }
     }, [checkedCard])
+
     useEffect(() => {
         setToDelete(cardsToDelete)
-    }, [cardsToDelete, checkedCard])
+    }, [cardsToDelete])
 
     useEffect(() => {
         setCardsToDelete([])
-    }, [clearTempArr])
+    }, [delClicked])
 
     return (
         <Box zIndex={0}>
@@ -42,15 +45,13 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
                     allCards
                         .slice(0)
                         .reverse()
-                        .map((eachCard) => {
-                            return (
-                                <Card
-                                    key={eachCard.id}
-                                    data={eachCard}
-                                    readOnly={readOnly}
-                                />
-                            )
-                        })
+                        .map((eachCard) => (
+                            <Card
+                                key={eachCard.id}
+                                data={eachCard}
+                                readOnly={readOnly}
+                            />
+                        ))
                 )}
             </Grid>
         </Box>
@@ -60,7 +61,7 @@ const CardList = ({ readOnly, setToDelete, clearTempArr }) => {
 CardList.propTypes = {
     readOnly: PropTypes.bool,
     setToDelete: PropTypes.func,
-    clearTempArr: PropTypes.bool,
+    delClicked: PropTypes.bool,
 }
 
 export default CardList

@@ -16,7 +16,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
-    const { setCheckedCard, addCard } = useCardData()
+    const { setCheckedCard, addCard, editCard } = useCardData()
     useEffect(() => {
         if (!newCard) {
             const checkedCard = { checked: boxChecked, card: data.id }
@@ -29,15 +29,11 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
         setBody(revertBody)
         setIsReadOnly(readOnly)
         setEditApproved(true)
-        if (readOnly) {
-            setIsEditing(false)
-        }
+        readOnly && setIsEditing(false)
     }, [readOnly])
 
     const validationOnDiscard = () => {
-        if (newCard) {
-            onClose()
-        }
+        newCard && onClose()
         setHeader(revertHeader)
         setBody(revertBody)
         setEditApproved(true)
@@ -64,6 +60,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
             setRevertBody(body)
             setIsEditing(false)
             setEditApproved(true)
+            editCard(data.id, { header, body })
         }
     }
 

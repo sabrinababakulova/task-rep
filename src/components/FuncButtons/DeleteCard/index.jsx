@@ -3,13 +3,15 @@ import { Button } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
 
 const Delete = ({ setDelClicked, isReadOnly }) => {
+    const [delClicked, setDelClickedState] = React.useState(false)
     return (
         <Button
             isDisabled={isReadOnly}
             colorScheme="teal"
             variant="outline"
             onClick={() => {
-                setDelClicked(true)
+                setDelClicked(!delClicked)
+                setDelClickedState(!delClicked)
             }}
         >
             Delete
