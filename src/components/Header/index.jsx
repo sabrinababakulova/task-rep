@@ -32,7 +32,7 @@ const Header = () => {
                 <Button>Home</Button>
             </Link>
             <Text fontWeight="bold" align="center">
-                Number Of Cards:
+                Number Of Cards Hello:
                 <Badge ml="2" fontSize="1rem" colorScheme="facebook">
                     {getNumberOfCards()}
                 </Badge>
