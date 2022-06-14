@@ -14,14 +14,17 @@ const CardList = ({ readOnly, setToDelete, delClicked }) => {
             const cardIndex = cardsToDelete.findIndex(
                 (id) => id === checkedCard.card
             )
-            if (cardIndex !== -1) {
-                cardsToDelete.splice(cardIndex, 1)
-            }
+            cardIndex !== -1 &&
+                setCardsToDelete((prevState) => {
+                    prevState.splice(cardIndex, 1)
+                    return [...prevState]
+                })
         }
     }, [checkedCard])
+
     useEffect(() => {
         setToDelete(cardsToDelete)
-    }, [cardsToDelete, checkedCard])
+    }, [cardsToDelete])
 
     useEffect(() => {
         setCardsToDelete([])

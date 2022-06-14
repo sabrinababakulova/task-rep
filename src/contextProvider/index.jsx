@@ -37,10 +37,8 @@ export const CardDataProvider = ({ children }) => {
         },
         removeCard: (cardIds) => {
             cardIds.forEach((id) => {
-                const cardIndex = allCards.findIndex((card) => card.id === id)
                 setAllCards((prevState) => {
-                    prevState.splice(cardIndex, 1)
-                    return [...prevState]
+                    return prevState.filter((card) => card.id !== id)
                 })
             })
         },
