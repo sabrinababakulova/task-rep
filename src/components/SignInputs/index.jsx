@@ -7,7 +7,7 @@ const StyledInput = styled.input`
     border: 1px solid teal;
     padding: 10px;
     margin: 10px;
-    width: 100%;
+    width: 20rem;
 `
 
 const StyledForm = styled.form`
@@ -18,6 +18,11 @@ const StyledForm = styled.form`
     margin: 10px;
     padding: 25px;
     border-radius: 15px;
+`
+const ErrorMessage = styled.p`
+    margin-top: 15px;
+    color:red;
+    width: 20rem;
 `
 
 const StyledButton = styled.button`
@@ -36,6 +41,7 @@ const SignInputs = () => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [errorExist, setErrorExist] = useState(false)
+    const errorMessage = 'Please make sure that your user name is your email, and the password is at least 8 characters long, and contains at least one number and one letter.'
     const hasNumber = (myString) => {
         return /\d/.test(myString)
     }
@@ -46,7 +52,7 @@ const SignInputs = () => {
         event.preventDefault()
         if (
             validator.isEmail(userName) &&
-            validator.isLength(password, { min: 8, max: 16 }) &&
+            validator.isLength(password, { min: 8 }) &&
             hasLetters(password) &&
             hasNumber(password)
         ) {
@@ -69,7 +75,7 @@ const SignInputs = () => {
             />
             <label htmlFor="user-name">Password</label>
             <StyledInput
-                type="text"
+                type="password"
                 id="password"
                 onChange={(e) => {
                     setPassword(e.target.value)
@@ -79,6 +85,7 @@ const SignInputs = () => {
             <StyledButton type="submit" disabled={errorExist}>
                 Sign in
             </StyledButton>
+            {errorExist && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </StyledForm>
     )
 }
