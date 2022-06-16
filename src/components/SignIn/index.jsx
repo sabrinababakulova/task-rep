@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import validator from 'validator'
 import Input from '../Input'
-
 
 const StyledForm = styled.form`
     display: flex;
@@ -15,7 +14,7 @@ const StyledForm = styled.form`
 `
 const ErrorMessage = styled.p`
     margin-top: 15px;
-    color:red;
+    color: red;
     width: 20rem;
 `
 
@@ -36,9 +35,9 @@ const SignIn = () => {
     const [password, setPassword] = useState('')
     const [errorExist, setErrorExist] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-    const UserNameError= 'Please make sure that your user name is your email'
-    const PasswordError = 'Please make sure that the password is at least 8 characters long, and contains at least one number and one letter.'
-    
+    const UserNameError = 'Please make sure that your user name is your email'
+    const PasswordError =
+        'Please make sure that the password is at least 8 characters long, and contains at least one number and one letter.'
 
     const hasNumber = (myString) => {
         return /\d/.test(myString)
@@ -48,28 +47,39 @@ const SignIn = () => {
     }
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (
-            !validator.isEmail(userName)
-        ) {
+        if (!validator.isEmail(userName)) {
             setErrorMessage(UserNameError)
             setErrorExist(true)
-            return;
-        } 
-        if(
+            return
+        }
+        if (
             !validator.isLength(password, { min: 8 }) ||
             !hasLetters(password) ||
-            !hasNumber(password)){
+            !hasNumber(password)
+        ) {
             setErrorMessage(PasswordError)
             setErrorExist(true)
-            return;
+            return
         }
         alert('Successfully signed in!')
         setErrorExist(false)
     }
     return (
         <StyledForm onSubmit={handleSubmit}>
-           <Input type="text" id="email" label="User name" setErrorExist={setErrorExist} setValue={setUserName}/>
-           <Input type="password" id="password" label="PassWord" setErrorExist={setErrorExist} setValue={setPassword}/>
+            <Input
+                type="text"
+                id="email"
+                label="User name"
+                setErrorExist={setErrorExist}
+                setValue={setUserName}
+            />
+            <Input
+                type="password"
+                id="password"
+                label="PassWord"
+                setErrorExist={setErrorExist}
+                setValue={setPassword}
+            />
             <StyledButton type="submit" disabled={errorExist}>
                 Sign in
             </StyledButton>

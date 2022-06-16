@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 const StyledInput = styled.input`
@@ -9,12 +9,10 @@ const StyledInput = styled.input`
     width: 20rem;
 `
 
-const Input = ({type, id, label, setErrorExist, setValue}) => {
-
-
-  return (
-    <div>
-         <label htmlFor={label}>{label}</label>
+const Input = ({ type, id, label, setErrorExist, setValue }) => {
+    return (
+        <div>
+            <label htmlFor={label}>{label}</label>
             <StyledInput
                 type={type}
                 id={id}
@@ -23,8 +21,8 @@ const Input = ({type, id, label, setErrorExist, setValue}) => {
                     setErrorExist(false)
                 }}
             />
-    </div>
-  )
+        </div>
+    )
 }
 
 Input.propTypes = {
@@ -32,6 +30,6 @@ Input.propTypes = {
     id: PropTypes.string,
     label: PropTypes.string,
     setErrorExist: PropTypes.func,
-    setValue: PropTypes.func
+    setValue: PropTypes.func,
 }
 export default Input
