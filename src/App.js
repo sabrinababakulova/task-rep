@@ -1,7 +1,7 @@
 import Header from './components/Header'
 import MainPage from './pages/MainPage'
-import NotFound from './pages/NotFoundPage'
-import SignIn from './pages/SignIn'
+import NotFoundPage from './pages/NotFoundPage'
+import SignInPage from './pages/SignInPage'
 import { Box } from '@chakra-ui/react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import React from 'react'
@@ -12,8 +12,8 @@ const App = () => {
                 <Header />
                 <Routes>
                     <Route path="/" element={<MainPage />} />
-                    <Route path="/signin" element={<SignIn />} />
-                    <Route path="*" element={<NotFound />} />
+                    <Route path="/signin" element={<SignInPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </Box>
         </Router>

@@ -1,14 +1,8 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import validator from 'validator'
+import Input from '../Input'
 
-const StyledInput = styled.input`
-    border-radius: 10px;
-    border: 1px solid teal;
-    padding: 10px;
-    margin: 10px;
-    width: 20rem;
-`
 
 const StyledForm = styled.form`
     display: flex;
@@ -37,11 +31,15 @@ const StyledButton = styled.button`
   `}
 `
 
-const SignInputs = () => {
+const SignIn = () => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [errorExist, setErrorExist] = useState(false)
-    const errorMessage = 'Please make sure that your user name is your email, and the password is at least 8 characters long, and contains at least one number and one letter.'
+    const [errorMessage, setErrorMessage] = useState('')
+    const UserNameError= 'Please make sure that your user name is your email'
+    const PasswordError = 'Please make sure that the password is at least 8 characters long, and contains at least one number and one letter.'
+    
+
     const hasNumber = (myString) => {
         return /\d/.test(myString)
     }
@@ -51,37 +49,27 @@ const SignInputs = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if (
-            validator.isEmail(userName) &&
-            validator.isLength(password, { min: 8 }) &&
-            hasLetters(password) &&
-            hasNumber(password)
+            !validator.isEmail(userName)
         ) {
-            alert('Successfully signed in!')
-            setErrorExist(false)
-        } else {
+            setErrorMessage(UserNameError)
             setErrorExist(true)
+            return;
+        } 
+        if(
+            !validator.isLength(password, { min: 8 }) ||
+            !hasLetters(password) ||
+            !hasNumber(password)){
+            setErrorMessage(PasswordError)
+            setErrorExist(true)
+            return;
         }
+        alert('Successfully signed in!')
+        setErrorExist(false)
     }
     return (
         <StyledForm onSubmit={handleSubmit}>
-            <label htmlFor="user-name">User name</label>
-            <StyledInput
-                type="text"
-                id="email"
-                onChange={(e) => {
-                    setUserName(e.target.value)
-                    setErrorExist(false)
-                }}
-            />
-            <label htmlFor="user-name">Password</label>
-            <StyledInput
-                type="password"
-                id="password"
-                onChange={(e) => {
-                    setPassword(e.target.value)
-                    setErrorExist(false)
-                }}
-            />
+           <Input type="text" id="email" label="User name" setErrorExist={setErrorExist} setValue={setUserName}/>
+           <Input type="password" id="password" label="PassWord" setErrorExist={setErrorExist} setValue={setPassword}/>
             <StyledButton type="submit" disabled={errorExist}>
                 Sign in
             </StyledButton>
@@ -90,4 +78,4 @@ const SignInputs = () => {
     )
 }
 
-export default SignInputs
+export default SignIn

@@ -1,16 +1,16 @@
 import React from 'react'
 import { Box, Text } from '@chakra-ui/react'
-import UserNamePasswordInput from '../../components/SignInputs'
+import SignIn from '../../components/SignIn'
 
-function SignIn() {
+function SignInPage() {
     return (
         <Box mb={5}>
             <Text textAlign="center" fontSize="30px">
                 Sign In
             </Text>
-            <UserNamePasswordInput />
+            <SignIn />
         </Box>
     )
 }
 
-export default SignIn
+export default SignInPage
