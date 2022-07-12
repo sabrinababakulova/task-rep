@@ -3,7 +3,7 @@ import { Box, Center, Heading, Image, Button } from '@chakra-ui/react'
 import AnimeGirl from '../../assets/NotFoundPhoto.png'
 import { Link } from 'react-router-dom'
 
-const NotFound = () => {
+const NotFoundPage = () => {
     return (
         <Box mt="10em" textAlign="center">
             <Heading mb="3">404 PAGE NOT FOUND</Heading>
@@ -33,4 +33,4 @@ const NotFound = () => {
     )
 }
 
-export default NotFound
+export default NotFoundPage

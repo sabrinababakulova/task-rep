@@ -7,6 +7,7 @@ import CardBody from './CardBody'
 import CardButton from './CardButtons'
 import withLoadingDelay from '../withLoadingDelay'
 import { useCardData } from '../../contextProvider'
+import validator from 'validator'
 const Card = ({ readOnly, data, editing, newCard, onClose }) => {
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
@@ -41,9 +42,7 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
     }
 
     const validationOnSave = () => {
-        //trimming to get rid of spaces
-        const isEmpty = (str) => !str.trim().length
-        if (isEmpty(header)) {
+        if (validator.isEmpty(header, { ignore_whitespace: true })) {
             setIsEditing(true)
             setEditApproved(false)
         } else {
