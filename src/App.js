@@ -4,11 +4,20 @@ import NotFoundPage from './pages/NotFoundPage'
 import SignInPage from './pages/SignInPage'
 import { Box } from '@chakra-ui/react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 const App = () => {
+    const dispatch = useDispatch()
+    const cards = useSelector((state) => state.cards)
     return (
         <Router>
-            <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
+            <Box
+                maxW="max"
+                ml="auto"
+                mr="auto"
+                mt="24"
+                align="center"
+            >
                 <Header />
                 <Routes>
                     <Route path="/" element={<MainPage />} />
