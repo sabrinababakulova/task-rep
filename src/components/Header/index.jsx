@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text, Flex, Badge, Button } from '@chakra-ui/react'
-import { useCardData } from '../../contextProvider'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
-    const { getNumberOfCards } = useCardData()
+    const { cards } = useSelector((state) => state)
     return (
         <Flex
             pos="fixed"
@@ -34,7 +34,7 @@ const Header = () => {
             <Text fontWeight="bold" align="center">
                 Number Of Cards:
                 <Badge ml="2" fontSize="1rem" colorScheme="facebook">
-                    {getNumberOfCards()}
+                    {cards.numberOfCards}
                 </Badge>
             </Text>
         </Flex>

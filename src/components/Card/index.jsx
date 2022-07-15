@@ -6,9 +6,11 @@ import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 import CardButton from './CardButtons'
 import withLoadingDelay from '../withLoadingDelay'
-import { useCardData } from '../../contextProvider'
+import { useSelector, useDispatch } from 'react-redux'
+import { checkCard, addCard, editCard } from '../../store/AllCardsSlice'
 import validator from 'validator'
 const Card = ({ readOnly, data, editing, newCard, onClose }) => {
+    const dispatch = useDispatch()
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
     const [revertHeader, setRevertHeader] = useState(header)
@@ -17,11 +19,10 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
     const [isReadOnly, setIsReadOnly] = useState(readOnly)
-    const { setCheckedCard, addCard, editCard } = useCardData()
     useEffect(() => {
         if (!newCard) {
             const checkedCard = { checked: boxChecked, card: data.id }
-            setCheckedCard(checkedCard)
+            dispatch(checkCard(checkedCard))
         }
     }, [boxChecked])
 
@@ -48,18 +49,24 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
         } else {
             if (newCard) {
                 const createdCard = {
-                    id: uuidv4(),
-                    header: header,
                     body: body,
+                    header: header,
+                    id: uuidv4(),
                 }
-                addCard(createdCard)
+                dispatch(addCard(createdCard))
                 onClose()
             }
             setRevertHeader(header)
             setRevertBody(body)
             setIsEditing(false)
             setEditApproved(true)
-            editCard(data.id, { header, body })
+            dispatch(
+                editCard({
+                    id: data.id,
+                    header: header,
+                    body: body,
+                })
+            )
         }
     }
 

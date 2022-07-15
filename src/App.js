@@ -1,23 +1,23 @@
+import { useEffect } from 'react'
 import Header from './components/Header'
 import MainPage from './pages/MainPage'
 import NotFoundPage from './pages/NotFoundPage'
 import SignInPage from './pages/SignInPage'
 import { Box } from '@chakra-ui/react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setAllCardsData } from './store/AllCardsSlice'
+
 import React from 'react'
 const App = () => {
+
     const dispatch = useDispatch()
-    const cards = useSelector((state) => state.cards)
+    useEffect(() => {
+        dispatch(setAllCardsData())
+    }, [])
     return (
         <Router>
-            <Box
-                maxW="max"
-                ml="auto"
-                mr="auto"
-                mt="24"
-                align="center"
-            >
+            <Box maxW="max" ml="auto" mr="auto" mt="24" align="center">
                 <Header />
                 <Routes>
                     <Route path="/" element={<MainPage />} />

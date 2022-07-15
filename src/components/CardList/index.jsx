@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { Box, Grid, Badge } from '@chakra-ui/react'
 import Card from '../Card'
 import PropTypes from 'prop-types'
-import { useCardData } from '../../contextProvider'
+import { useSelector } from 'react-redux'
 
 const CardList = ({ readOnly, setToDelete, delClicked }) => {
-    const { checkedCard, allCards, getNumberOfCards } = useCardData()
+    const { cards } = useSelector((state) => state)
     const [cardsToDelete, setCardsToDelete] = useState([])
     useEffect(() => {
-        if (checkedCard.checked) {
-            setCardsToDelete((prevState) => [...prevState, checkedCard.card])
+        if (cards.checkedCard.checked) {
+            setCardsToDelete((prevState) => [
+                ...prevState,
+                cards.checkedCard.card,
+            ])
         } else {
             const cardIndex = cardsToDelete.findIndex(
-                (id) => id === checkedCard.card
+                (id) => id === cards.checkedCard.card
             )
             cardIndex !== -1 &&
                 setCardsToDelete((prevState) => {
@@ -20,7 +23,7 @@ const CardList = ({ readOnly, setToDelete, delClicked }) => {
                     return [...prevState]
                 })
         }
-    }, [checkedCard])
+    }, [cards.checkedCard])
 
     useEffect(() => {
         setToDelete(cardsToDelete)
@@ -37,12 +40,12 @@ const CardList = ({ readOnly, setToDelete, delClicked }) => {
                 templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
                 gap={8}
             >
-                {getNumberOfCards === 0 ? (
+                {cards.numberOfCards === 0 ? (
                     <Badge colorScheme="red" mt="4" fontSize="1em">
                         You dont have any cards
                     </Badge>
                 ) : (
-                    allCards
+                    cards.cards
                         .slice(0)
                         .reverse()
                         .map((eachCard) => (

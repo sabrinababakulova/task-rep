@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import CardList from '../../components/CardList'
 import FuncButtons from '../../components/FuncButtons'
-import { useCardData } from '../../contextProvider'
+import { useDispatch } from 'react-redux'
+import { removeCard } from '../../store/AllCardsSlice'
 
 const MainPage = () => {
     const [readOnly, setReadOnly] = useState(false)
     const [delClicked, setDelClicked] = useState(false)
     const [cardIds, setCardIds] = useState([])
-    const { removeCard } = useCardData()
-
+    const dispatch = useDispatch()
     useEffect(() => {
-        removeCard(cardIds)
+        dispatch(removeCard(cardIds))
         setCardIds([])
     }, [delClicked])
 
