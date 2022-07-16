@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Box, Grid, Badge } from '@chakra-ui/react'
 import Card from '../Card'
-import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 
-const CardList = ({ readOnly, setToDelete, delClicked }) => {
+const CardList = () => {
     const { cards } = useSelector((state) => state)
-    const [cardsToDelete, setCardsToDelete] = useState([])
-    useEffect(() => {
-        if (cards.checkedCard.checked) {
-            setCardsToDelete((prevState) => [
-                ...prevState,
-                cards.checkedCard.card,
-            ])
-        } else {
-            const cardIndex = cardsToDelete.findIndex(
-                (id) => id === cards.checkedCard.card
-            )
-            cardIndex !== -1 &&
-                setCardsToDelete((prevState) => {
-                    prevState.splice(cardIndex, 1)
-                    return [...prevState]
-                })
-        }
-    }, [cards.checkedCard])
-
-    useEffect(() => {
-        setToDelete(cardsToDelete)
-    }, [cardsToDelete])
-
-    useEffect(() => {
-        setCardsToDelete([])
-    }, [delClicked])
-
+    console.log(cards)
     return (
         <Box zIndex={0}>
             <Grid
@@ -52,7 +25,6 @@ const CardList = ({ readOnly, setToDelete, delClicked }) => {
                             <Card
                                 key={eachCard.id}
                                 data={eachCard}
-                                readOnly={readOnly}
                             />
                         ))
                 )}
@@ -61,10 +33,5 @@ const CardList = ({ readOnly, setToDelete, delClicked }) => {
     )
 }
 
-CardList.propTypes = {
-    readOnly: PropTypes.bool,
-    setToDelete: PropTypes.func,
-    delClicked: PropTypes.bool,
-}
 
 export default CardList

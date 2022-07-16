@@ -8,6 +8,8 @@ import {
     FormErrorMessage,
 } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { checkCard, unCheckCard } from '../../../store/AllCardsSlice'
 
 const CardHeader = ({
     editApproved,
@@ -16,8 +18,13 @@ const CardHeader = ({
     setEditApproved,
     header,
     setBoxChecked,
-    boxChecked,
+    cardId,
 }) => {
+    const dispatch = useDispatch()
+    const handleChange = (isChecked) => {
+        setBoxChecked(isChecked)
+        isChecked ? dispatch(checkCard(cardId)) : dispatch(unCheckCard(cardId))
+    }
     return (
         <>
             <Flex justifyContent="space-between">
@@ -40,9 +47,8 @@ const CardHeader = ({
                 </FormControl>
                 {!isEditing && (
                     <Checkbox
-                        isChecked={boxChecked}
                         onChange={(e) => {
-                            setBoxChecked(e.target.checked)
+                            handleChange(e.target.checked)
                         }}
                         colorScheme="green"
                         borderColor="gray.500"
@@ -63,6 +69,7 @@ CardHeader.propTypes = {
     header: PropTypes.string.isRequired,
     setBoxChecked: PropTypes.func.isRequired,
     boxChecked: PropTypes.bool,
+    cardId: PropTypes.string.isRequired,
 }
 
 export default CardHeader

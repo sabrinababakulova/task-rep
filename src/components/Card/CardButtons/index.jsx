@@ -4,17 +4,17 @@ import { BsPencilSquare } from 'react-icons/bs'
 import { FaRegSave } from 'react-icons/fa'
 import { GrRevert } from 'react-icons/gr'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
 const CardButton = ({
     isEditing,
-    isReadOnly,
     setBoxChecked,
     validationOnDiscard,
     validationOnSave,
     editApproved,
-    readOnly,
     setIsEditing,
 }) => {
+    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
     if (isEditing && !isReadOnly) {
         return (
             <>
@@ -39,7 +39,7 @@ const CardButton = ({
     } else {
         return (
             <IconButton
-                isDisabled={readOnly}
+                isDisabled={isReadOnly}
                 size="lg"
                 icon={<BsPencilSquare size="32" />}
                 onClick={() => {
@@ -53,12 +53,10 @@ const CardButton = ({
 
 CardButton.propTypes = {
     isEditing: PropTypes.bool,
-    isReadOnly: PropTypes.bool,
     setBoxChecked: PropTypes.func,
     validationOnDiscard: PropTypes.func.isRequired,
     validationOnSave: PropTypes.func.isRequired,
     editApproved: PropTypes.bool,
-    readOnly: PropTypes.bool,
     setIsEditing: PropTypes.func.isRequired,
 }
 

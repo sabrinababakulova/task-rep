@@ -1,27 +1,25 @@
 import React from 'react'
 import { Button } from '@chakra-ui/react'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeCard } from '../../../store/AllCardsSlice'
 
-const Delete = ({ setDelClicked, isReadOnly }) => {
-    const [delClicked, setDelClickedState] = React.useState(false)
+const Delete = () => {
+    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
+    const dispatch = useDispatch()
+    const handleClick = () => {
+        dispatch(removeCard())
+    }
     return (
         <Button
             isDisabled={isReadOnly}
             colorScheme="teal"
             variant="outline"
-            onClick={() => {
-                setDelClicked(!delClicked)
-                setDelClickedState(!delClicked)
-            }}
+            onClick={handleClick}
         >
             Delete
         </Button>
     )
 }
 
-Delete.propTypes = {
-    setDelClicked: PropTypes.func.isRequired,
-    isReadOnly: PropTypes.bool,
-}
 
 export default Delete

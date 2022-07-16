@@ -6,10 +6,11 @@ import CardHeader from './CardHeader'
 import CardBody from './CardBody'
 import CardButton from './CardButtons'
 import withLoadingDelay from '../withLoadingDelay'
-import { useSelector, useDispatch } from 'react-redux'
-import { checkCard, addCard, editCard } from '../../store/AllCardsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { addCard, editCard } from '../../store/AllCardsSlice'
 import validator from 'validator'
-const Card = ({ readOnly, data, editing, newCard, onClose }) => {
+const Card = ({ data, editing, newCard, onClose }) => {
+    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
     const dispatch = useDispatch()
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
@@ -18,21 +19,13 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
     const [boxChecked, setBoxChecked] = useState(false)
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
-    const [isReadOnly, setIsReadOnly] = useState(readOnly)
-    useEffect(() => {
-        if (!newCard) {
-            const checkedCard = { checked: boxChecked, card: data.id }
-            dispatch(checkCard(checkedCard))
-        }
-    }, [boxChecked])
 
     useEffect(() => {
         setHeader(revertHeader)
         setBody(revertBody)
-        setIsReadOnly(readOnly)
         setEditApproved(true)
-        readOnly && setIsEditing(false)
-    }, [readOnly])
+        isReadOnly && setIsEditing(false)
+    }, [isReadOnly])
 
     const validationOnDiscard = () => {
         newCard && onClose()
@@ -85,8 +78,8 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
                 setHeader={setHeader}
                 setEditApproved={setEditApproved}
                 header={header}
-                boxChecked={boxChecked}
                 setBoxChecked={setBoxChecked}
+                cardId={data.id}
             />
 
             <CardBody
@@ -99,13 +92,11 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
             <Spacer h="12" />
 
             <CardButton
-                isEditing={isEditing}
-                isReadOnly={isReadOnly}
                 setBoxChecked={setBoxChecked}
+                isEditing={isEditing}
                 validationOnDiscard={validationOnDiscard}
                 validationOnSave={validationOnSave}
                 editApproved={editApproved}
-                readOnly={readOnly}
                 setIsEditing={setIsEditing}
             />
         </Box>
@@ -115,7 +106,6 @@ const Card = ({ readOnly, data, editing, newCard, onClose }) => {
 const CardWithLoadingDelay = withLoadingDelay(Card)
 
 Card.propTypes = {
-    readOnly: PropTypes.bool,
     data: PropTypes.object,
     editing: PropTypes.bool,
     newCard: PropTypes.bool,

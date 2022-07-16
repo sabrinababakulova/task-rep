@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
-    const { cards } = useSelector((state) => state)
+    const numberOfCards = useSelector((state) => state.cards.numberOfCards)
     return (
         <Flex
             pos="fixed"
@@ -34,7 +34,7 @@ const Header = () => {
             <Text fontWeight="bold" align="center">
                 Number Of Cards:
                 <Badge ml="2" fontSize="1rem" colorScheme="facebook">
-                    {cards.numberOfCards}
+                    {numberOfCards}
                 </Badge>
             </Text>
         </Flex>

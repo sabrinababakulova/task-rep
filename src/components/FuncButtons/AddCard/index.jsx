@@ -10,9 +10,10 @@ import {
     Center,
 } from '@chakra-ui/react'
 import Card from '../../Card'
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
-const AddCard = ({ isReadOnly }) => {
+const AddCard = () => {
+    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
@@ -47,10 +48,6 @@ const AddCard = ({ isReadOnly }) => {
             </Modal>
         </>
     )
-}
-
-AddCard.propTypes = {
-    isReadOnly: PropTypes.bool,
 }
 
 export default AddCard

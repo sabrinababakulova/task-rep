@@ -1,22 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchedCardData } from '../../components/DataFetching'
-const allCards = [
-    {
-        body: "Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun's rays, the seed grows progressively larger.",
-        header: 'Bulbasaur',
-        id: '001',
-    },
-]
+
 const initialState = {
     cards: [],
-    checkedCard: {},
+    checkedCards: [],
     numberOfCards: 0,
+    isReadOnly:false,
 }
 
 export const allCardsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
+        setIsReadOnly:(state)=>{
+            state.isReadOnly = !state.isReadOnly
+        },
         setAllCardsData: (state) => {
             state.cards = [...fetchedCardData]
             state.numberOfCards = state.cards.length
@@ -25,10 +23,11 @@ export const allCardsSlice = createSlice({
             state.cards = [...state.cards, action.payload]
             state.numberOfCards++
         },
-        removeCard: (state, action) => {
-            action.payload.forEach((id) => {
-                state.cards = state.cards.filter((card) => card.id !== id)
-            })
+        removeCard: (state) => {
+            state.cards = state.cards.filter(
+                (card) => !state.checkedCards.includes(card.id)
+            )
+            state.checkedCards = []
             state.numberOfCards = state.cards.length
         },
         editCard: (state, action) => {
@@ -37,11 +36,23 @@ export const allCardsSlice = createSlice({
             state.cards[cardIndex] = { body, header, id }
         },
         checkCard: (state, action) => {
-            state.checkedCard = action.payload
+            state.checkedCards = [...state.checkedCards, action.payload]
+        },
+        unCheckCard: (state, action) => {
+            state.checkedCards = state.checkedCards.filter(
+                (card) => card.card !== action.payload.card
+            )
         },
     },
 })
 
-export const { setAllCardsData, addCard, removeCard, editCard, checkCard } =
-    allCardsSlice.actions
+export const {
+    setAllCardsData,
+    unCheckCard,
+    addCard,
+    removeCard,
+    editCard,
+    checkCard,
+    setIsReadOnly,
+} = allCardsSlice.actions
 export default allCardsSlice.reducer
