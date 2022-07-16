@@ -9,7 +9,10 @@ import withLoadingDelay from '../withLoadingDelay'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCard, editCard } from '../../store/AllCardsSlice'
 import validator from 'validator'
+import { useNavigate } from 'react-router-dom'
+
 const Card = ({ data, editing, newCard, onClose }) => {
+  const navigate = useNavigate()
   const isReadOnly = useSelector((state) => state.cards.isReadOnly)
   const checkedCards = useSelector((state) => state.cards.checkedCards)
   const dispatch = useDispatch()
@@ -20,7 +23,9 @@ const Card = ({ data, editing, newCard, onClose }) => {
   const [revertBody, setRevertBody] = useState(body)
   const [isEditing, setIsEditing] = useState(editing)
   const [editApproved, setEditApproved] = useState(true)
-
+  const handleDOubleClick = () => {
+    !isEditing && navigate(`/card/${data.id}`)
+  }
   useEffect(() => {
     setHeader(revertHeader)
     setBody(revertBody)
@@ -67,11 +72,13 @@ const Card = ({ data, editing, newCard, onClose }) => {
   return (
     <Box
       boxShadow="base"
+      align="center"
       p="6"
       mb="4"
       w={['xs', 'sm', 'lg']}
       bg={boxChecked ? 'gray.300' : 'gray.100'}
       transition="0.2s linear"
+      onDoubleClick={handleDOubleClick}
     >
       <CardHeader
         editApproved={editApproved}

@@ -10,6 +10,7 @@ const CardBody = ({ body, isEditing, setBody, setRevertBody }) => {
       minH="150px"
       size="xl"
       overflow="hidden"
+      placeholder='enter your card body here'
       variant={isEditing ? 'filled' : 'unstyled'}
       onClick={() => setRevertBody(body)}
       isReadOnly={!isEditing}
