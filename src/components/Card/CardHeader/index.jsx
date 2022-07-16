@@ -17,12 +17,10 @@ const CardHeader = ({
     setHeader,
     setEditApproved,
     header,
-    setBoxChecked,
     cardId,
 }) => {
     const dispatch = useDispatch()
     const handleChange = (isChecked) => {
-        setBoxChecked(isChecked)
         isChecked ? dispatch(checkCard(cardId)) : dispatch(unCheckCard(cardId))
     }
     return (
@@ -67,8 +65,6 @@ CardHeader.propTypes = {
     setHeader: PropTypes.func.isRequired,
     setEditApproved: PropTypes.func.isRequired,
     header: PropTypes.string.isRequired,
-    setBoxChecked: PropTypes.func.isRequired,
-    boxChecked: PropTypes.bool,
     cardId: PropTypes.string.isRequired,
 }
 

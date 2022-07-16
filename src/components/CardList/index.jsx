@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 
 const CardList = () => {
     const { cards } = useSelector((state) => state)
-    console.log(cards)
     return (
         <Box zIndex={0}>
             <Grid

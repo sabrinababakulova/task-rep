@@ -4,17 +4,22 @@ import { BsPencilSquare } from 'react-icons/bs'
 import { FaRegSave } from 'react-icons/fa'
 import { GrRevert } from 'react-icons/gr'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { unCheckCard } from '../../../store/AllCardsSlice'
 
 const CardButton = ({
     isEditing,
-    setBoxChecked,
     validationOnDiscard,
     validationOnSave,
     editApproved,
     setIsEditing,
+    cardId
 }) => {
     const isReadOnly = useSelector((state) => state.cards.isReadOnly)
+    const dispatch = useDispatch()
+    const handleClick = () => {
+        dispatch(unCheckCard(cardId))
+    }
     if (isEditing && !isReadOnly) {
         return (
             <>
@@ -22,7 +27,7 @@ const CardButton = ({
                     justifyContent="space-around"
                     w="full"
                     size="lg"
-                    onClick={() => setBoxChecked(false)}
+                    onClick={handleClick}
                 >
                     <IconButton
                         icon={<GrRevert size="32" />}
@@ -44,7 +49,7 @@ const CardButton = ({
                 icon={<BsPencilSquare size="32" />}
                 onClick={() => {
                     setIsEditing(true)
-                    setBoxChecked(false)
+                    handleClick()
                 }}
             />
         )
@@ -53,11 +58,11 @@ const CardButton = ({
 
 CardButton.propTypes = {
     isEditing: PropTypes.bool,
-    setBoxChecked: PropTypes.func,
     validationOnDiscard: PropTypes.func.isRequired,
     validationOnSave: PropTypes.func.isRequired,
     editApproved: PropTypes.bool,
     setIsEditing: PropTypes.func.isRequired,
+    cardId: PropTypes.string.isRequired
 }
 
 export default CardButton

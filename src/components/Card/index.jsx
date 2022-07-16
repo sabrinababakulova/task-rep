@@ -11,12 +11,13 @@ import { addCard, editCard } from '../../store/AllCardsSlice'
 import validator from 'validator'
 const Card = ({ data, editing, newCard, onClose }) => {
     const isReadOnly = useSelector((state) => state.cards.isReadOnly)
+    const checkedCards = useSelector((state) => state.cards.checkedCards)
     const dispatch = useDispatch()
+    const boxChecked = checkedCards.includes(data.id)
     const [header, setHeader] = useState(data.header)
     const [body, setBody] = useState(data.body)
     const [revertHeader, setRevertHeader] = useState(header)
     const [revertBody, setRevertBody] = useState(body)
-    const [boxChecked, setBoxChecked] = useState(false)
     const [isEditing, setIsEditing] = useState(editing)
     const [editApproved, setEditApproved] = useState(true)
 
@@ -69,7 +70,7 @@ const Card = ({ data, editing, newCard, onClose }) => {
             p="6"
             mb="4"
             w={['xs', 'sm', 'lg']}
-            bg={boxChecked ? 'gray.300' : 'gray.50'}
+            bg={boxChecked ? 'gray.300' : 'gray.100'}
             transition="0.2s linear"
         >
             <CardHeader
@@ -78,7 +79,6 @@ const Card = ({ data, editing, newCard, onClose }) => {
                 setHeader={setHeader}
                 setEditApproved={setEditApproved}
                 header={header}
-                setBoxChecked={setBoxChecked}
                 cardId={data.id}
             />
 
@@ -92,7 +92,7 @@ const Card = ({ data, editing, newCard, onClose }) => {
             <Spacer h="12" />
 
             <CardButton
-                setBoxChecked={setBoxChecked}
+                cardId={data.id}
                 isEditing={isEditing}
                 validationOnDiscard={validationOnDiscard}
                 validationOnSave={validationOnSave}
