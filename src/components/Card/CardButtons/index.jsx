@@ -8,61 +8,61 @@ import { useSelector, useDispatch } from 'react-redux'
 import { unCheckCard } from '../../../store/AllCardsSlice'
 
 const CardButton = ({
-    isEditing,
-    validationOnDiscard,
-    validationOnSave,
-    editApproved,
-    setIsEditing,
-    cardId
+  isEditing,
+  validationOnDiscard,
+  validationOnSave,
+  editApproved,
+  setIsEditing,
+  cardId,
 }) => {
-    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
-    const dispatch = useDispatch()
-    const handleClick = () => {
-        dispatch(unCheckCard(cardId))
-    }
-    if (isEditing && !isReadOnly) {
-        return (
-            <>
-                <ButtonGroup
-                    justifyContent="space-around"
-                    w="full"
-                    size="lg"
-                    onClick={handleClick}
-                >
-                    <IconButton
-                        icon={<GrRevert size="32" />}
-                        onClick={validationOnDiscard}
-                    />
-                    <IconButton
-                        isDisabled={!editApproved}
-                        icon={<FaRegSave size="32" />}
-                        onClick={validationOnSave}
-                    />
-                </ButtonGroup>
-            </>
-        )
-    } else {
-        return (
-            <IconButton
-                isDisabled={isReadOnly}
-                size="lg"
-                icon={<BsPencilSquare size="32" />}
-                onClick={() => {
-                    setIsEditing(true)
-                    handleClick()
-                }}
-            />
-        )
-    }
+  const isReadOnly = useSelector((state) => state.cards.isReadOnly)
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(unCheckCard(cardId))
+  }
+  if (isEditing && !isReadOnly) {
+    return (
+      <>
+        <ButtonGroup
+          justifyContent="space-around"
+          w="full"
+          size="lg"
+          onClick={handleClick}
+        >
+          <IconButton
+            icon={<GrRevert size="32" />}
+            onClick={validationOnDiscard}
+          />
+          <IconButton
+            isDisabled={!editApproved}
+            icon={<FaRegSave size="32" />}
+            onClick={validationOnSave}
+          />
+        </ButtonGroup>
+      </>
+    )
+  } else {
+    return (
+      <IconButton
+        isDisabled={isReadOnly}
+        size="lg"
+        icon={<BsPencilSquare size="32" />}
+        onClick={() => {
+          setIsEditing(true)
+          handleClick()
+        }}
+      />
+    )
+  }
 }
 
 CardButton.propTypes = {
-    isEditing: PropTypes.bool,
-    validationOnDiscard: PropTypes.func.isRequired,
-    validationOnSave: PropTypes.func.isRequired,
-    editApproved: PropTypes.bool,
-    setIsEditing: PropTypes.func.isRequired,
-    cardId: PropTypes.string.isRequired
+  isEditing: PropTypes.bool,
+  validationOnDiscard: PropTypes.func.isRequired,
+  validationOnSave: PropTypes.func.isRequired,
+  editApproved: PropTypes.bool,
+  setIsEditing: PropTypes.func.isRequired,
+  cardId: PropTypes.string.isRequired,
 }
 
 export default CardButton

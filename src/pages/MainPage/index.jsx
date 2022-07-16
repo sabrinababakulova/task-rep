@@ -3,12 +3,12 @@ import CardList from '../../components/CardList'
 import FuncButtons from '../../components/FuncButtons'
 
 const MainPage = () => {
-    return (
-        <>
-            <FuncButtons />
-            <CardList />
-        </>
-    )
+  return (
+    <>
+      <FuncButtons />
+      <CardList />
+    </>
+  )
 }
 
 export default MainPage

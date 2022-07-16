@@ -10,106 +10,106 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addCard, editCard } from '../../store/AllCardsSlice'
 import validator from 'validator'
 const Card = ({ data, editing, newCard, onClose }) => {
-    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
-    const checkedCards = useSelector((state) => state.cards.checkedCards)
-    const dispatch = useDispatch()
-    const boxChecked = checkedCards.includes(data.id)
-    const [header, setHeader] = useState(data.header)
-    const [body, setBody] = useState(data.body)
-    const [revertHeader, setRevertHeader] = useState(header)
-    const [revertBody, setRevertBody] = useState(body)
-    const [isEditing, setIsEditing] = useState(editing)
-    const [editApproved, setEditApproved] = useState(true)
+  const isReadOnly = useSelector((state) => state.cards.isReadOnly)
+  const checkedCards = useSelector((state) => state.cards.checkedCards)
+  const dispatch = useDispatch()
+  const boxChecked = checkedCards.includes(data.id)
+  const [header, setHeader] = useState(data.header)
+  const [body, setBody] = useState(data.body)
+  const [revertHeader, setRevertHeader] = useState(header)
+  const [revertBody, setRevertBody] = useState(body)
+  const [isEditing, setIsEditing] = useState(editing)
+  const [editApproved, setEditApproved] = useState(true)
 
-    useEffect(() => {
-        setHeader(revertHeader)
-        setBody(revertBody)
-        setEditApproved(true)
-        isReadOnly && setIsEditing(false)
-    }, [isReadOnly])
+  useEffect(() => {
+    setHeader(revertHeader)
+    setBody(revertBody)
+    setEditApproved(true)
+    isReadOnly && setIsEditing(false)
+  }, [isReadOnly])
 
-    const validationOnDiscard = () => {
-        newCard && onClose()
-        setHeader(revertHeader)
-        setBody(revertBody)
-        setEditApproved(true)
-        setIsEditing(false)
-    }
+  const validationOnDiscard = () => {
+    newCard && onClose()
+    setHeader(revertHeader)
+    setBody(revertBody)
+    setEditApproved(true)
+    setIsEditing(false)
+  }
 
-    const validationOnSave = () => {
-        if (validator.isEmpty(header, { ignore_whitespace: true })) {
-            setIsEditing(true)
-            setEditApproved(false)
-        } else {
-            if (newCard) {
-                const createdCard = {
-                    body: body,
-                    header: header,
-                    id: uuidv4(),
-                }
-                dispatch(addCard(createdCard))
-                onClose()
-            }
-            setRevertHeader(header)
-            setRevertBody(body)
-            setIsEditing(false)
-            setEditApproved(true)
-            dispatch(
-                editCard({
-                    id: data.id,
-                    header: header,
-                    body: body,
-                })
-            )
+  const validationOnSave = () => {
+    if (validator.isEmpty(header, { ignore_whitespace: true })) {
+      setIsEditing(true)
+      setEditApproved(false)
+    } else {
+      if (newCard) {
+        const createdCard = {
+          body: body,
+          header: header,
+          id: uuidv4(),
         }
+        dispatch(addCard(createdCard))
+        onClose()
+      }
+      setRevertHeader(header)
+      setRevertBody(body)
+      setIsEditing(false)
+      setEditApproved(true)
+      dispatch(
+        editCard({
+          id: data.id,
+          header: header,
+          body: body,
+        })
+      )
     }
+  }
 
-    return (
-        <Box
-            boxShadow="base"
-            p="6"
-            mb="4"
-            w={['xs', 'sm', 'lg']}
-            bg={boxChecked ? 'gray.300' : 'gray.100'}
-            transition="0.2s linear"
-        >
-            <CardHeader
-                editApproved={editApproved}
-                isEditing={isEditing}
-                setHeader={setHeader}
-                setEditApproved={setEditApproved}
-                header={header}
-                cardId={data.id}
-            />
+  return (
+    <Box
+      boxShadow="base"
+      p="6"
+      mb="4"
+      w={['xs', 'sm', 'lg']}
+      bg={boxChecked ? 'gray.300' : 'gray.100'}
+      transition="0.2s linear"
+    >
+      <CardHeader
+        editApproved={editApproved}
+        isEditing={isEditing}
+        setHeader={setHeader}
+        setEditApproved={setEditApproved}
+        header={header}
+        cardId={data.id}
+      />
 
-            <CardBody
-                body={body}
-                isEditing={isEditing}
-                setBody={setBody}
-                setRevertBody={setRevertBody}
-            />
+      <CardBody
+        body={body}
+        isEditing={isEditing}
+        setBody={setBody}
+        setRevertBody={setRevertBody}
+      />
 
-            <Spacer h="12" />
+      <Spacer h="12" />
 
-            <CardButton
-                cardId={data.id}
-                isEditing={isEditing}
-                validationOnDiscard={validationOnDiscard}
-                validationOnSave={validationOnSave}
-                editApproved={editApproved}
-                setIsEditing={setIsEditing}
-            />
-        </Box>
-    )
+      <CardButton
+        cardId={data.id}
+        isEditing={isEditing}
+        validationOnDiscard={validationOnDiscard}
+        validationOnSave={validationOnSave}
+        editApproved={editApproved}
+        setIsEditing={setIsEditing}
+      />
+    </Box>
+  )
 }
 
 const CardWithLoadingDelay = withLoadingDelay(Card)
 
 Card.propTypes = {
-    data: PropTypes.object,
-    editing: PropTypes.bool,
-    newCard: PropTypes.bool,
-    onClose: PropTypes.func,
+  data: PropTypes.object,
+  editing: PropTypes.bool,
+  newCard: PropTypes.bool,
+  onClose: PropTypes.func,
 }
 
 export default CardWithLoadingDelay

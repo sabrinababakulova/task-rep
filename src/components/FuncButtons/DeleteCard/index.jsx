@@ -4,22 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeCard } from '../../../store/AllCardsSlice'
 
 const Delete = () => {
-    const isReadOnly = useSelector((state) => state.cards.isReadOnly)
-    const dispatch = useDispatch()
-    const handleClick = () => {
-        dispatch(removeCard())
-    }
-    return (
-        <Button
-            isDisabled={isReadOnly}
-            colorScheme="teal"
-            variant="outline"
-            onClick={handleClick}
-        >
-            Delete
-        </Button>
-    )
+  const isReadOnly = useSelector((state) => state.cards.isReadOnly)
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(removeCard())
+  }
+  return (
+    <Button
+      isDisabled={isReadOnly}
+      colorScheme="teal"
+      variant="outline"
+      onClick={handleClick}
+    >
+      Delete
+    </Button>
+  )
 }
-
 
 export default Delete
