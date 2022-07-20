@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './components/Header'
 import MainPage from './pages/MainPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -7,10 +7,13 @@ import CardPreview from './pages/CardPreview'
 import { Box } from '@chakra-ui/react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setAllCardsData } from './store/AllCardsSlice'
+import { fetchData } from './store/AllCardsSlice'
+
 const App = () => {
   const dispatch = useDispatch()
-  dispatch(setAllCardsData())
+  useEffect(() => {
+    dispatch(fetchData())
+  }, [])
   return (
     <Router>
       <Box maxW="max" ml="auto" mr="auto" mt="24">

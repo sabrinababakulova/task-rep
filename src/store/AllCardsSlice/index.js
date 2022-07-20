@@ -1,12 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { fetchedCardData } from '../../components/DataFetching'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { getData } from '../../components/DataFetching'
 
 const initialState = {
   cards: [],
   checkedCards: [],
   numberOfCards: 0,
   isReadOnly: false,
+  status: null,
 }
+
+export const fetchData = createAsyncThunk('cards/fetchData', async () => {
+  return getData().then((userData) => {
+    return userData
+  })
+})
 
 export const allCardsSlice = createSlice({
   name: 'cards',
@@ -14,10 +21,6 @@ export const allCardsSlice = createSlice({
   reducers: {
     setIsReadOnly: (state) => {
       state.isReadOnly = !state.isReadOnly
-    },
-    setAllCardsData: (state) => {
-      state.cards = [...fetchedCardData]
-      state.numberOfCards = state.cards.length
     },
     addCard: (state, action) => {
       state.cards = [...state.cards, action.payload]
@@ -44,10 +47,22 @@ export const allCardsSlice = createSlice({
       )
     },
   },
+  extraReducers: {
+    [fetchData.pending]: (state) => {
+      state.status = 'loading'
+    },
+    [fetchData.fulfilled]: (state, action) => {
+      state.status = 'success'
+      state.cards = action.payload
+      state.numberOfCards = state.cards.length
+    },
+    [fetchData.rejected]: (state) => {
+      state.status = 'error'
+    },
+  },
 })
 
 export const {
-  setAllCardsData,
   unCheckCard,
   addCard,
   removeCard,

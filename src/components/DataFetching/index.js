@@ -1,7 +1,5 @@
 import axios from 'axios'
-export const fetchedCardData = []
-
-const getData = async () => {
+export const getData = async () => {
   return new Promise((resolve, reject) => {
     axios
       .get(
@@ -21,6 +19,3 @@ const getData = async () => {
       })
   })
 }
-getData().then((userData) => {
-  fetchedCardData.push(...userData)
-})
