@@ -1,6 +1,6 @@
-import React from 'react'
-import { Box, Text } from '@chakra-ui/react'
-import SignIn from '../../components/SignIn'
+import React from 'react';
+import { Box, Text } from '@chakra-ui/react';
+import SignIn from '../../components/SignIn';
 
 function SignInPage() {
   return (
@@ -10,7 +10,7 @@ function SignInPage() {
       </Text>
       <SignIn />
     </Box>
-  )
+  );
 }
 
-export default SignInPage
+export default SignInPage;

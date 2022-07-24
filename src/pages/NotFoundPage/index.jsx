@@ -1,7 +1,7 @@
-import React from 'react'
-import { Box, Center, Heading, Image, Button } from '@chakra-ui/react'
-import AnimeGirl from '../../assets/NotFoundPhoto.png'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Box, Center, Heading, Image, Button } from '@chakra-ui/react';
+import AnimeGirl from '../../assets/NotFoundPhoto.png';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
@@ -30,7 +30,7 @@ const NotFoundPage = () => {
         </Button>
       </Link>
     </Box>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

@@ -18,6 +18,7 @@ const CardHeader = ({
   setEditApproved,
   header,
   cardId,
+  showBtns,
 }) => {
   const dispatch = useDispatch()
   const handleChange = (isChecked) => {
@@ -31,7 +32,7 @@ const CardHeader = ({
           onChange={() => setEditApproved(true)}
         >
           <Input
-          autoFocus={true}
+            autoFocus={true}
             variant={isEditing ? 'filled' : 'unstyled'}
             fontSize="2xl"
             isReadOnly={!isEditing}
@@ -43,7 +44,7 @@ const CardHeader = ({
             <FormErrorMessage>Header should not be empty</FormErrorMessage>
           )}
         </FormControl>
-        {!isEditing && (
+        {showBtns && !isEditing ? (
           <Checkbox
             onChange={(e) => {
               handleChange(e.target.checked)
@@ -51,7 +52,7 @@ const CardHeader = ({
             colorScheme="green"
             borderColor="gray.500"
           />
-        )}
+        ) : null}
       </Flex>
 
       <Divider h={2} />
@@ -65,7 +66,8 @@ CardHeader.propTypes = {
   setHeader: PropTypes.func.isRequired,
   setEditApproved: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,
-  cardId: PropTypes.string.isRequired,
+  cardId: PropTypes.string,
+  showBtns: PropTypes.bool,
 }
 
 export default CardHeader

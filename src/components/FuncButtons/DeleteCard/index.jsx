@@ -1,14 +1,14 @@
-import React from 'react'
-import { Button } from '@chakra-ui/react'
-import { useDispatch, useSelector } from 'react-redux'
-import { removeCard } from '../../../store/AllCardsSlice'
+import React from 'react';
+import { Button } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCard } from '../../../store/AllCardsSlice';
 
 const Delete = () => {
-  const isReadOnly = useSelector((state) => state.cards.isReadOnly)
-  const dispatch = useDispatch()
+  const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
+  const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(removeCard())
-  }
+    dispatch(removeCard());
+  };
   return (
     <Button
       isDisabled={isReadOnly}
@@ -18,7 +18,7 @@ const Delete = () => {
     >
       Delete
     </Button>
-  )
-}
+  );
+};
 
-export default Delete
+export default Delete;

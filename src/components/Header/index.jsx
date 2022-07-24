@@ -1,10 +1,12 @@
-import React from 'react'
-import { Text, Flex, Badge, Button } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Text, Flex, Badge, Button } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const numberOfCards = useSelector((state) => state.cards.numberOfCards)
+  const numberOfCards = useSelector(
+    (state) => state.allCardsInfo.numberOfCards
+  );
   return (
     <Flex
       pos="fixed"
@@ -32,13 +34,13 @@ const Header = () => {
         <Button>Home</Button>
       </Link>
       <Text fontWeight="bold" align="center">
-        Number Of Cards:
+        Number Of cards:
         <Badge ml="2" fontSize="1rem" colorScheme="facebook">
           {numberOfCards}
         </Badge>
       </Text>
     </Flex>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

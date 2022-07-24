@@ -1,10 +1,17 @@
-import React from 'react'
-import { Box, Grid, Badge } from '@chakra-ui/react'
-import Card from '../Card'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { Box, Grid, Badge, Spinner, Center } from '@chakra-ui/react';
+import Card from '../Card';
+import { useSelector } from 'react-redux';
 
 const CardList = () => {
-  const { cards } = useSelector((state) => state)
+  const { allCardsInfo } = useSelector((state) => state);
+  if (allCardsInfo.status === 'loading') {
+    return (
+      <Center mt={4}>
+        <Spinner size="xl" color="teal" thickness="4px" />;
+      </Center>
+    );
+  }
   return (
     <Box zIndex={0}>
       <Grid
@@ -12,19 +19,19 @@ const CardList = () => {
         templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
         gap={8}
       >
-        {cards.numberOfCards === 0 ? (
+        {allCardsInfo.numberOfCards === 0 ? (
           <Badge colorScheme="red" mt="4" fontSize="1em">
             You dont have any cards
           </Badge>
         ) : (
-          cards.cards
-            .slice(0)
+          allCardsInfo.cardsCollection
+            .slice()
             .reverse()
             .map((eachCard) => <Card key={eachCard.id} data={eachCard} />)
         )}
       </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default CardList
+export default CardList;

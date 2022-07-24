@@ -1,6 +1,6 @@
-import React from 'react'
-import CardList from '../../components/CardList'
-import FuncButtons from '../../components/FuncButtons'
+import React from 'react';
+import CardList from '../../components/CardList';
+import FuncButtons from '../../components/FuncButtons';
 
 const MainPage = () => {
   return (
@@ -8,7 +8,7 @@ const MainPage = () => {
       <FuncButtons />
       <CardList />
     </>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;

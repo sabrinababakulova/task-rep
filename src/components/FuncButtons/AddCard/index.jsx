@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -8,13 +8,13 @@ import {
   useDisclosure,
   Button,
   Center,
-} from '@chakra-ui/react'
-import Card from '../../Card'
-import { useSelector } from 'react-redux'
+} from '@chakra-ui/react';
+import Card from '../../Card';
+import { useSelector } from 'react-redux';
 
 const AddCard = () => {
-  const isReadOnly = useSelector((state) => state.cards.isReadOnly)
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Button
@@ -38,7 +38,7 @@ const AddCard = () => {
           <Center>
             <Card
               data={{ header: '', body: '' }}
-              newCard={true}
+              cardType="newCard"
               editing={true}
               onClose={onClose}
             />
@@ -47,7 +47,7 @@ const AddCard = () => {
         </ModalContent>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default AddCard
+export default AddCard;

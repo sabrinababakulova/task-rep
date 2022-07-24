@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 export const getData = async () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     axios
       .get(
         'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json'
@@ -12,10 +12,7 @@ export const getData = async () => {
             body: eachItem.About,
             id: eachItem.Number,
           }))
-        )
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        );
+      });
+  });
+};

@@ -1,66 +1,66 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getData } from '../../components/DataFetching'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getData } from '../../api/DataFetching';
 
 const initialState = {
-  cards: [],
+  cardsCollection: [],
   checkedCards: [],
   numberOfCards: 0,
   isReadOnly: false,
   status: null,
-}
+};
 
-export const fetchData = createAsyncThunk('cards/fetchData', async () => {
-  return getData().then((userData) => {
-    return userData
-  })
-})
+export const fetchData = createAsyncThunk('allCardsInfo/fetchData', async () =>
+   getData()
+);
 
 export const allCardsSlice = createSlice({
-  name: 'cards',
+  name: 'allCardsInfo',
   initialState,
   reducers: {
     setIsReadOnly: (state) => {
-      state.isReadOnly = !state.isReadOnly
+      state.isReadOnly = !state.isReadOnly;
     },
     addCard: (state, action) => {
-      state.cards = [...state.cards, action.payload]
-      state.numberOfCards++
+      state.cardsCollection = [...state.cardsCollection, action.payload];
+      state.numberOfCards++;
     },
     removeCard: (state) => {
-      state.cards = state.cards.filter(
+      state.cardsCollection = state.cardsCollection.filter(
         (card) => !state.checkedCards.includes(card.id)
-      )
-      state.checkedCards = []
-      state.numberOfCards = state.cards.length
+      );
+      state.checkedCards = [];
+      state.numberOfCards = state.cardsCollection.length;
     },
     editCard: (state, action) => {
-      const { id, header, body } = action.payload
-      const cardIndex = state.cards.findIndex((card) => card.id === id)
-      state.cards[cardIndex] = { body, header, id }
+      const { id, header, body } = action.payload;
+      const cardIndex = state.cardsCollection.findIndex(
+        (card) => card.id === id
+      );
+      state.cardsCollection[cardIndex] = { body, header, id };
     },
     checkCard: (state, action) => {
-      state.checkedCards = [...state.checkedCards, action.payload]
+      state.checkedCards = [...state.checkedCards, action.payload];
     },
     unCheckCard: (state, action) => {
       state.checkedCards = state.checkedCards.filter(
         (card) => card.card !== action.payload.card
-      )
+      );
     },
   },
   extraReducers: {
     [fetchData.pending]: (state) => {
-      state.status = 'loading'
+      state.status = 'loading';
     },
     [fetchData.fulfilled]: (state, action) => {
-      state.status = 'success'
-      state.cards = action.payload
-      state.numberOfCards = state.cards.length
+      state.status = 'success';
+      state.cardsCollection = action.payload;
+      state.numberOfCards = state.cardsCollection.length;
     },
     [fetchData.rejected]: (state) => {
-      state.status = 'error'
+      state.status = 'error';
     },
   },
-})
+});
 
 export const {
   unCheckCard,
@@ -69,5 +69,5 @@ export const {
   editCard,
   checkCard,
   setIsReadOnly,
-} = allCardsSlice.actions
-export default allCardsSlice.reducer
+} = allCardsSlice.actions;
+export default allCardsSlice.reducer;

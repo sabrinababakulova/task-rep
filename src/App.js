@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
-import Header from './components/Header'
-import MainPage from './pages/MainPage'
-import NotFoundPage from './pages/NotFoundPage'
-import SignInPage from './pages/SignInPage'
-import CardPreview from './pages/CardPreview'
-import { Box } from '@chakra-ui/react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { fetchData } from './store/AllCardsSlice'
+import React, { useEffect } from 'react';
+import Header from './components/Header';
+import MainPage from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage';
+import SignInPage from './pages/SignInPage';
+import CardPreview from './pages/CardPreview';
+import { Box } from '@chakra-ui/react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchData } from './store/AllCardsSlice';
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchData())
-  }, [])
+    dispatch(fetchData());
+  }, []);
   return (
     <Router>
       <Box maxW="max" ml="auto" mr="auto" mt="24">
@@ -26,7 +26,7 @@ const App = () => {
         </Routes>
       </Box>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

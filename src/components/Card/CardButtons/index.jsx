@@ -1,11 +1,11 @@
-import React from 'react'
-import { ButtonGroup, IconButton } from '@chakra-ui/react'
-import { BsPencilSquare } from 'react-icons/bs'
-import { FaRegSave } from 'react-icons/fa'
-import { GrRevert } from 'react-icons/gr'
-import PropTypes from 'prop-types'
-import { useSelector, useDispatch } from 'react-redux'
-import { unCheckCard } from '../../../store/AllCardsSlice'
+import React from 'react';
+import { ButtonGroup, IconButton } from '@chakra-ui/react';
+import { BsPencilSquare } from 'react-icons/bs';
+import { FaRegSave } from 'react-icons/fa';
+import { GrRevert } from 'react-icons/gr';
+import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { unCheckCard } from '../../../store/AllCardsSlice';
 
 const CardButton = ({
   isEditing,
@@ -15,11 +15,11 @@ const CardButton = ({
   setIsEditing,
   cardId,
 }) => {
-  const isReadOnly = useSelector((state) => state.cards.isReadOnly)
-  const dispatch = useDispatch()
+  const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
+  const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(unCheckCard(cardId))
-  }
+    dispatch(unCheckCard(cardId));
+  };
   if (isEditing && !isReadOnly) {
     return (
       <>
@@ -40,7 +40,7 @@ const CardButton = ({
           />
         </ButtonGroup>
       </>
-    )
+    );
   } else {
     return (
       <IconButton
@@ -48,13 +48,13 @@ const CardButton = ({
         size="lg"
         icon={<BsPencilSquare size="32" />}
         onClick={() => {
-          setIsEditing(true)
-          handleClick()
+          setIsEditing(true);
+          handleClick();
         }}
       />
-    )
+    );
   }
-}
+};
 
 CardButton.propTypes = {
   isEditing: PropTypes.bool,
@@ -62,7 +62,7 @@ CardButton.propTypes = {
   validationOnSave: PropTypes.func.isRequired,
   editApproved: PropTypes.bool,
   setIsEditing: PropTypes.func.isRequired,
-  cardId: PropTypes.string.isRequired,
-}
+  cardId: PropTypes.string,
+};
 
-export default CardButton
+export default CardButton;
