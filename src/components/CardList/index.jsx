@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Badge, Spinner, Center } from '@chakra-ui/react';
 import Card from '../Card';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchData } from '../../store/AllCardsSlice';
 const CardList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+  }, []);
   const { allCardsInfo } = useSelector((state) => state);
   if (allCardsInfo.status === 'loading') {
     return (
