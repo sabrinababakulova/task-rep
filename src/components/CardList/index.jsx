@@ -6,7 +6,7 @@ import { fetchData } from '../../store/AllCardsSlice';
 const CardList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchData());
+    if (!allCardsInfo) dispatch(fetchData());
   }, []);
   const { allCardsInfo } = useSelector((state) => state);
   if (allCardsInfo.status === 'loading') {
