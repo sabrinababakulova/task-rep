@@ -38,7 +38,6 @@ const CardHeader = ({
             isReadOnly={!isEditing}
             value={header}
             onChange={(e) => setHeader(e.target.value)}
-            placeholder="enter your card header here"
           />
           {!editApproved && (
             <FormErrorMessage>Header should not be empty</FormErrorMessage>
