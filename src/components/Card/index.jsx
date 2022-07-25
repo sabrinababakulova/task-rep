@@ -74,7 +74,7 @@ const Card = ({ data, editing, cardType, onClose }) => {
           dispatch(editCard(editedCard));
           navigate(-1);
           break;
-        case 'editCard':
+        default:
           dispatch(
             editCard({
               id: data.id,
