@@ -32,7 +32,6 @@ const CardHeader = ({
           onChange={() => setEditApproved(true)}
         >
           <Input
-            autoFocus={true}
             variant={isEditing ? 'filled' : 'unstyled'}
             fontSize="2xl"
             isReadOnly={!isEditing}
