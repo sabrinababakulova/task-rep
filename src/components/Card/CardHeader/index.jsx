@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Flex,
   Checkbox,
@@ -6,10 +6,10 @@ import {
   Input,
   Divider,
   FormErrorMessage,
-} from '@chakra-ui/react'
-import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
-import { checkCard, unCheckCard } from '../../../store/AllCardsSlice'
+} from '@chakra-ui/react';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { checkCard, unCheckCard } from '../../../store/AllCardsSlice';
 
 const CardHeader = ({
   editApproved,
@@ -20,10 +20,10 @@ const CardHeader = ({
   cardId,
   showBtns,
 }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleChange = (isChecked) => {
-    isChecked ? dispatch(checkCard(cardId)) : dispatch(unCheckCard(cardId))
-  }
+    isChecked ? dispatch(checkCard(cardId)) : dispatch(unCheckCard(cardId));
+  };
   return (
     <>
       <Flex justifyContent="space-between">
@@ -46,7 +46,7 @@ const CardHeader = ({
         {showBtns && !isEditing ? (
           <Checkbox
             onChange={(e) => {
-              handleChange(e.target.checked)
+              handleChange(e.target.checked);
             }}
             colorScheme="green"
             borderColor="gray.500"
@@ -56,8 +56,8 @@ const CardHeader = ({
 
       <Divider h={2} />
     </>
-  )
-}
+  );
+};
 
 CardHeader.propTypes = {
   editApproved: PropTypes.bool,
@@ -67,6 +67,6 @@ CardHeader.propTypes = {
   header: PropTypes.string.isRequired,
   cardId: PropTypes.string,
   showBtns: PropTypes.bool,
-}
+};
 
-export default CardHeader
+export default CardHeader;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import validator from 'validator';
 import Input from '../Input';
 import { useNavigate } from 'react-router-dom';
-import { StyledButton, StyledForm , ErrorMessage } from './styles';
+import { StyledButton, StyledForm, ErrorMessage } from './styles';
 
 const SignIn = () => {
   const navigate = useNavigate();

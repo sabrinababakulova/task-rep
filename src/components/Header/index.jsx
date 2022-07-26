@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const numberOfCards = useSelector(
-    (state) => state.allCardsInfo.numberOfCards
+  const cardsCollection = useSelector(
+    (state) => state.allCardsInfo.cardsCollection
   );
   return (
     <Flex
@@ -36,7 +36,7 @@ const Header = () => {
       <Text fontWeight="bold" align="center">
         Number Of cards:
         <Badge ml="2" fontSize="1rem" colorScheme="facebook">
-          {numberOfCards}
+          {cardsCollection.length}
         </Badge>
       </Text>
     </Flex>

@@ -1,18 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 4px;
-`
+`;
 
 const Icon = styled.svg`
   fill: none;
   stroke: white;
   stroke-width: 2px;
-`
+`;
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
@@ -24,7 +24,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   position: absolute;
   white-space: nowrap;
   width: 1px;
-`
+`;
 
 const StyledCheckbox = styled.div`
   display: inline-block;
@@ -39,7 +39,7 @@ const StyledCheckbox = styled.div`
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }
-`
+`;
 
 export const Checkbox = ({ checked, ...props }) => (
   <CheckboxContainer>
@@ -50,14 +50,14 @@ export const Checkbox = ({ checked, ...props }) => (
       </Icon>
     </StyledCheckbox>
   </CheckboxContainer>
-)
+);
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,
-}
+};
 
 export const LabelStyled = styled.label`
   border: 2px solid teal;
   padding: 0 4px;
   border-radius: 6px;
-`
+`;

@@ -4,13 +4,12 @@ import { getData } from '../../api/DataFetching';
 const initialState = {
   cardsCollection: [],
   checkedCards: [],
-  numberOfCards: 0,
   isReadOnly: false,
   status: null,
 };
 
 export const fetchData = createAsyncThunk('allCardsInfo/fetchData', async () =>
-   getData()
+  getData()
 );
 
 export const allCardsSlice = createSlice({
@@ -22,14 +21,12 @@ export const allCardsSlice = createSlice({
     },
     addCard: (state, action) => {
       state.cardsCollection = [...state.cardsCollection, action.payload];
-      state.numberOfCards++;
     },
     removeCard: (state) => {
       state.cardsCollection = state.cardsCollection.filter(
         (card) => !state.checkedCards.includes(card.id)
       );
       state.checkedCards = [];
-      state.numberOfCards = state.cardsCollection.length;
     },
     editCard: (state, action) => {
       const { id, header, body } = action.payload;
@@ -54,7 +51,6 @@ export const allCardsSlice = createSlice({
     [fetchData.fulfilled]: (state, action) => {
       state.status = 'success';
       state.cardsCollection = action.payload;
-      state.numberOfCards = state.cardsCollection.length;
     },
     [fetchData.rejected]: (state) => {
       state.status = 'error';

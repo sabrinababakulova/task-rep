@@ -6,7 +6,7 @@ import { fetchData } from '../../store/AllCardsSlice';
 const CardList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!allCardsInfo) dispatch(fetchData());
+    if (!allCardsInfo.status) dispatch(fetchData());
   }, []);
   const { allCardsInfo } = useSelector((state) => state);
   if (allCardsInfo.status === 'loading') {
@@ -23,7 +23,7 @@ const CardList = () => {
         templateColumns={['1fr', '1fr', '1fr', 'repeat(2, 1fr)']}
         gap={8}
       >
-        {allCardsInfo.numberOfCards === 0 ? (
+        {allCardsInfo.cardsCollection.length === 0 ? (
           <Badge colorScheme="red" mt="4" fontSize="1em">
             You dont have any cards
           </Badge>
