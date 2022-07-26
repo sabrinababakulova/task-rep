@@ -16,19 +16,23 @@ export const allCardsSlice = createSlice({
   name: 'allCardsInfo',
   initialState,
   reducers: {
-    setIsReadOnly: (state) => {
+    setIsReadOnly: (state, action) => {
+      console.log('action:', action.type);
       state.isReadOnly = !state.isReadOnly;
     },
     addCard: (state, action) => {
+      console.log('action:', action.type, '\nparameters:', action.payload);
       state.cardsCollection = [...state.cardsCollection, action.payload];
     },
-    removeCard: (state) => {
+    removeCard: (state,action) => {
+      console.log('action:', action.type);
       state.cardsCollection = state.cardsCollection.filter(
         (card) => !state.checkedCards.includes(card.id)
       );
       state.checkedCards = [];
     },
     editCard: (state, action) => {
+      console.log('action:', action.type, '\nparameters:', action.payload);
       const { id, header, body } = action.payload;
       const cardIndex = state.cardsCollection.findIndex(
         (card) => card.id === id
@@ -36,9 +40,11 @@ export const allCardsSlice = createSlice({
       state.cardsCollection[cardIndex] = { body, header, id };
     },
     checkCard: (state, action) => {
+      console.log('action:', action.type, '\nparameters:', action.payload);
       state.checkedCards = [...state.checkedCards, action.payload];
     },
     unCheckCard: (state, action) => {
+      console.log('action:', action.type, '\nparameters:', action.payload);
       state.checkedCards = state.checkedCards.filter(
         (card) => card.card !== action.payload.card
       );
@@ -49,6 +55,7 @@ export const allCardsSlice = createSlice({
       state.status = 'loading';
     },
     [fetchData.fulfilled]: (state, action) => {
+      console.log('action:', action.type, '\nparameters:', action.payload);
       state.status = 'success';
       state.cardsCollection = action.payload;
     },
