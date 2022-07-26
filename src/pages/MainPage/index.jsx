@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import CardList from '../../components/CardList'
-import FuncButtons from '../../components/FuncButtons'
-import { useCardData } from '../../contextProvider'
+import React from 'react';
+import CardList from '../../components/CardList';
+import FuncButtons from '../../components/FuncButtons';
 
 const MainPage = () => {
-    const [readOnly, setReadOnly] = useState(false)
-    const [delClicked, setDelClicked] = useState(false)
-    const [cardIds, setCardIds] = useState([])
-    const { removeCard } = useCardData()
+  return (
+    <>
+      <FuncButtons />
+      <CardList />
+    </>
+  );
+};
 
-    useEffect(() => {
-        removeCard(cardIds)
-        setCardIds([])
-    }, [delClicked])
-
-    return (
-        <>
-            <FuncButtons
-                setReadOnly={setReadOnly}
-                setDelClicked={setDelClicked}
-                isReadOnly={readOnly}
-            />
-            <CardList
-                readOnly={readOnly}
-                delClicked={delClicked}
-                setToDelete={setCardIds}
-            />
-        </>
-    )
-}
-
-export default MainPage
+export default MainPage;

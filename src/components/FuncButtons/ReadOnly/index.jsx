@@ -1,25 +1,20 @@
-import React, { useState } from 'react'
-import { Checkbox, LabelStyled } from '../Styles/CheckBoxStyled'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { Checkbox, LabelStyled } from '../Styles/CheckBoxStyled';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsReadOnly } from '../../../store/AllCardsSlice';
 
-const ReadOnly = ({ setReadOnly }) => {
-    const [isReadOnly, setIsReadOnly] = useState(false)
-    return (
-        <LabelStyled>
-            <Checkbox
-                checked={isReadOnly}
-                onChange={() => {
-                    setReadOnly(!isReadOnly)
-                    setIsReadOnly(!isReadOnly)
-                }}
-            />
-            <span>Read Only</span>
-        </LabelStyled>
-    )
-}
+const ReadOnly = () => {
+  const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(setIsReadOnly());
+  };
+  return (
+    <LabelStyled>
+      <Checkbox checked={isReadOnly} onChange={handleClick} />
+      <span>Read Only</span>
+    </LabelStyled>
+  );
+};
 
-ReadOnly.propTypes = {
-    setReadOnly: PropTypes.func,
-}
-
-export default ReadOnly
+export default ReadOnly;
