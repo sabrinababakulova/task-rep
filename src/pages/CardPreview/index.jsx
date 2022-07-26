@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import { useSelector } from 'react-redux';
@@ -14,6 +14,9 @@ const CardPreview = () => {
   const card = allCardsInfo.cardsCollection.find(
     (eachCard) => eachCard.id === id
   );
+  useEffect(() => {
+    !card && navigate('/does-not-exist');
+  }, []);
   return (
     <>
       <Button onClick={handleGoBack} variant="link" fontSize="2xl">
