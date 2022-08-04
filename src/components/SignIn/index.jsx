@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import validator from 'validator';
 import Input from '../Input';
-import { useNavigate } from 'react-router-dom';
 import { StyledButton, StyledForm, ErrorMessage } from './styles';
+import { useDispatch } from 'react-redux';
+import { setSimpleUser, setAdmin } from '../../store/UserSlide';
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -33,7 +34,11 @@ const SignIn = () => {
       setErrorMessage(PasswordError);
       return;
     }
-    navigate('/');
+    if (userName === 'testAdmin@gmail.com' || password === '12345yuiopp') {
+      dispatch(setAdmin());
+    } else {
+      dispatch(setSimpleUser());
+    }
     setErrorMessage('');
   };
   return (
