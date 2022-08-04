@@ -35,9 +35,9 @@ const SignIn = () => {
       return;
     }
     if (userName === 'testAdmin@gmail.com' || password === '12345yuiopp') {
-      dispatch(setAdmin());
+      dispatch(setAdmin({name: userName, status: true}));
     } else {
-      dispatch(setSimpleUser());
+      dispatch(setSimpleUser({ name: userName, status: true }));
     }
     setErrorMessage('');
   };

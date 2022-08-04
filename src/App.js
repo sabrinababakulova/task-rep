@@ -18,7 +18,6 @@ const App = () => {
             <Header />
             <Routes>
               <Route path="/" element={<MainPage />} />
-              <Route path="/signin" element={<SignInPage />} />
               <Route path="card/:id" element={<CardPreview />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

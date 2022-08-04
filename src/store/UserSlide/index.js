@@ -2,22 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   authorized: false,
   role: 'simple_user',
-  status:null,
+  status: null,
+  name: '',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setSimpleUser: (state) => {
+    setSimpleUser: (state, action) => {
+      const { name, status } = action.payload;
       state.role = 'simple_user';
       state.authorized = false;
-      state.status = 'logged!';
+      state.status = status;
+      state.name = name;
     },
-    setAdmin: (state) => {
+    setAdmin: (state, action) => {
+      const { name, status } = action.payload;
       state.role = 'admin';
       state.authorized = true;
-      state.status = 'logged!';
+      state.status = status;
+      state.name = name;
     },
   },
 });

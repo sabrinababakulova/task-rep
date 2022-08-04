@@ -1,12 +1,20 @@
 import React from 'react';
 import { Text, Flex, Badge, Button } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setAdmin, setSimpleUser } from '../../store/UserSlide';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const cardsCollection = useSelector(
     (state) => state.allCardsInfo.cardsCollection
   );
+  const user = useSelector((state) => state.user);
+  const onClickSignOut = () => {
+    user.role === 'admin'
+      ? dispatch(setAdmin({ name: '', status: false }))
+      : dispatch(setSimpleUser({ name: '', status: false }));
+  };
   return (
     <Flex
       pos="fixed"
@@ -27,12 +35,13 @@ const Header = () => {
         boxShadow: 'lg',
       }}
     >
-      <Link to="/signIn">
-        <Button>SignIn</Button>
-      </Link>
+      <Button onClick={onClickSignOut}>Sign out</Button>
       <Link to="/">
         <Button>Home</Button>
       </Link>
+      <Text fontWeight="bold" align="center">
+        Welcome {user.name.split('@')[0]}!
+      </Text>
       <Text fontWeight="bold" align="center">
         Number Of cards:
         <Badge ml="2" fontSize="1rem" colorScheme="facebook">
