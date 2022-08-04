@@ -20,10 +20,10 @@ const App = () => {
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="card/:id" element={<CardPreview />} />
-              <Route path="*" element={<NotFoundPage />} />
               {user.role === 'admin' && (
                 <Route path="settings" element={<SettingsPage />} />
               )}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </>
         ) : (
