@@ -6,14 +6,14 @@ import logger from 'redux-logger';
 const saveToLocalStorage = (state) => {
   try {
     const serialisedState = JSON.stringify(state.user);
-    localStorage.setItem('persistantState', serialisedState);
+    localStorage.setItem('userInfo', serialisedState);
   } catch (e) {
     console.warn(e);
   }
 };
 const loadFromLocalStorage = () => {
   try {
-    const serialisedState = localStorage.getItem('persistantState');
+    const serialisedState = localStorage.getItem('userInfo');
     if (serialisedState === null) return undefined;
     return JSON.parse(serialisedState);
   } catch (e) {

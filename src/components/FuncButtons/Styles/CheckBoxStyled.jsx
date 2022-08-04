@@ -58,6 +58,6 @@ Checkbox.propTypes = {
 
 export const LabelStyled = styled.label`
   border: 2px solid teal;
-  padding: 0 4px;
+  padding:4px;
   border-radius: 6px;
 `;

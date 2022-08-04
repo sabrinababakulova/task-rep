@@ -42,6 +42,11 @@ const Header = () => {
       <Text fontWeight="bold" align="center">
         Welcome {user.name.split('@')[0]}!
       </Text>
+      {user.role === 'admin' && (
+        <Link to="/settings">
+          <Button>Settings</Button>
+        </Link>
+      )}
       <Text fontWeight="bold" align="center">
         Number Of cards:
         <Badge ml="2" fontSize="1rem" colorScheme="facebook">
