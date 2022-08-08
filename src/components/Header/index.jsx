@@ -2,8 +2,7 @@ import React from 'react';
 import { Text, Flex, Badge, Button } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAdmin, setSimpleUser } from '../../store/UserSlide';
-import { Link } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
 const Header = () => {
   const dispatch = useDispatch();
   const cardsCollection = useSelector(
@@ -36,16 +35,20 @@ const Header = () => {
       }}
     >
       <Button onClick={onClickSignOut}>Sign out</Button>
-      <Link to="/">
-        <Button>Home</Button>
-      </Link>
+      <NavLink to="/">
+        {({ isActive }) => (
+          <Button colorScheme={isActive ? 'teal' : 'gray'}>Home</Button>
+        )}
+      </NavLink>
       <Text fontWeight="bold" align="center">
         Welcome {user.name.split('@')[0]}!
       </Text>
       {user.role === 'admin' && (
-        <Link to="/settings">
-          <Button>Settings</Button>
-        </Link>
+        <NavLink to="/settings">
+          {({ isActive }) => (
+            <Button colorScheme={isActive ? 'teal' : 'gray'}>Settings</Button>
+          )}
+        </NavLink>
       )}
       <Text fontWeight="bold" align="center">
         Number Of cards:
