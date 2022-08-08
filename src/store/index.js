@@ -6,7 +6,9 @@ import logger from 'redux-logger';
 const saveToLocalStorage = (state) => {
   try {
     const serialisedState = JSON.stringify(state.user);
+    const readOnlyState = JSON.stringify(state.allCardsInfo.isReadOnly);
     localStorage.setItem('userInfo', serialisedState);
+    localStorage.setItem('readOnly', readOnlyState);
   } catch (e) {
     console.warn(e);
   }

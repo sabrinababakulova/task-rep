@@ -4,7 +4,7 @@ import { getData } from '../../api/DataFetching';
 const initialState = {
   cardsCollection: [],
   checkedCards: [],
-  isReadOnly: false,
+  isReadOnly: localStorage.getItem('readOnly') || false,
   status: null,
 };
 
