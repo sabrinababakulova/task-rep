@@ -1,12 +1,17 @@
 import React from 'react';
 import { Text, Flex, Badge, Button } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../store/UserSlide';
+import { NavLink } from 'react-router-dom';
 const Header = () => {
+  const dispatch = useDispatch();
   const cardsCollection = useSelector(
     (state) => state.allCardsInfo.cardsCollection
   );
+  const user = useSelector((state) => state.user);
+  const onClickSignOut = () => {
+    dispatch(setUser({ name: '', status: false, role: 'simple_user' }));
+  };
   return (
     <Flex
       pos="fixed"
@@ -27,12 +32,22 @@ const Header = () => {
         boxShadow: 'lg',
       }}
     >
-      <Link to="/signIn">
-        <Button>SignIn</Button>
-      </Link>
-      <Link to="/">
-        <Button>Home</Button>
-      </Link>
+      <Button onClick={onClickSignOut}>Sign out</Button>
+      <NavLink to="/">
+        {({ isActive }) => (
+          <Button colorScheme={isActive ? 'teal' : 'gray'}>Home</Button>
+        )}
+      </NavLink>
+      <Text fontWeight="bold" align="center">
+        Welcome {user.name.split('@')[0]}!
+      </Text>
+      {user.role === 'admin' && (
+        <NavLink to="/settings">
+          {({ isActive }) => (
+            <Button colorScheme={isActive ? 'teal' : 'gray'}>Settings</Button>
+          )}
+        </NavLink>
+      )}
       <Text fontWeight="bold" align="center">
         Number Of cards:
         <Badge ml="2" fontSize="1rem" colorScheme="facebook">

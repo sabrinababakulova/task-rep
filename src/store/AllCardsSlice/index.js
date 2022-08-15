@@ -4,7 +4,7 @@ import { getData } from '../../api/DataFetching';
 const initialState = {
   cardsCollection: [],
   checkedCards: [],
-  isReadOnly: false,
+  isReadOnly: localStorage.getItem('readOnly') || false,
   status: null,
 };
 
@@ -40,7 +40,7 @@ export const allCardsSlice = createSlice({
     },
     unCheckCard: (state, action) => {
       state.checkedCards = state.checkedCards.filter(
-        (card) => card.card !== action.payload.card
+        (card) => card !== action.payload
       );
     },
   },

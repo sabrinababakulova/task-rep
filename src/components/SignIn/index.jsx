@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import validator from 'validator';
 import Input from '../Input';
-import { useNavigate } from 'react-router-dom';
 import { StyledButton, StyledForm, ErrorMessage } from './styles';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../store/UserSlide';
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -21,7 +22,7 @@ const SignIn = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validator.isEmail(userName)) {
+    if (!validator.isEmail(userName.trim())) {
       setErrorMessage(UserNameError);
       return;
     }
@@ -33,7 +34,14 @@ const SignIn = () => {
       setErrorMessage(PasswordError);
       return;
     }
-    navigate('/');
+    if (
+      userName.trim() === 'testAdmin@gmail.com' &&
+      password === '12345yuiopp'
+    ) {
+      dispatch(setUser({ name: userName, status: true, role: 'admin' }));
+    } else {
+      dispatch(setUser({ name: userName, status: true, role: 'simple_user' }));
+    }
     setErrorMessage('');
   };
   return (

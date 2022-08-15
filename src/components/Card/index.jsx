@@ -15,6 +15,7 @@ const Card = ({ data, editing, cardType, onClose }) => {
   const navigate = useNavigate();
   const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
   const checkedCards = useSelector((state) => state.allCardsInfo.checkedCards);
+  const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
   const boxChecked = checkedCards.includes(data.id);
   const [showBtns, setShowBtns] = useState(true);
@@ -110,6 +111,7 @@ const Card = ({ data, editing, cardType, onClose }) => {
         setEditApproved={setEditApproved}
         header={header}
         cardId={data.id}
+        boxChecked={boxChecked}
       />
 
       <CardBody
@@ -120,15 +122,16 @@ const Card = ({ data, editing, cardType, onClose }) => {
       />
 
       <Spacer h="12" />
-
-      <CardButton
-        cardId={data.id}
-        isEditing={isEditing}
-        validationOnDiscard={validationOnDiscard}
-        validationOnSave={validationOnSave}
-        editApproved={editApproved}
-        setIsEditing={setIsEditing}
-      />
+      {cardType === 'previewCard' && user.role === 'simple_user' ? null : (
+        <CardButton
+          cardId={data.id}
+          isEditing={isEditing}
+          validationOnDiscard={validationOnDiscard}
+          validationOnSave={validationOnSave}
+          editApproved={editApproved}
+          setIsEditing={setIsEditing}
+        />
+      )}
     </Box>
   );
 };
