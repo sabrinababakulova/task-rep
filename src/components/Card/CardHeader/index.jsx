@@ -19,6 +19,7 @@ const CardHeader = ({
   header,
   cardId,
   showBtns,
+  boxChecked,
 }) => {
   const dispatch = useDispatch();
   const handleChange = (isChecked) => {
@@ -47,6 +48,7 @@ const CardHeader = ({
             onChange={(e) => {
               handleChange(e.target.checked);
             }}
+            isChecked={boxChecked}
             colorScheme="green"
             borderColor="gray.500"
           />
@@ -66,6 +68,7 @@ CardHeader.propTypes = {
   header: PropTypes.string.isRequired,
   cardId: PropTypes.string,
   showBtns: PropTypes.bool,
+  boxChecked: PropTypes.bool,
 };
 
 export default CardHeader;

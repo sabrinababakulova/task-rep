@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Flex, Badge, Button } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAdmin, setSimpleUser } from '../../store/UserSlide';
+import { setUser } from '../../store/UserSlide';
 import { NavLink } from 'react-router-dom';
 const Header = () => {
   const dispatch = useDispatch();
@@ -10,9 +10,7 @@ const Header = () => {
   );
   const user = useSelector((state) => state.user);
   const onClickSignOut = () => {
-    user.role === 'admin'
-      ? dispatch(setAdmin({ name: '', status: false }))
-      : dispatch(setSimpleUser({ name: '', status: false }));
+    dispatch(setUser({ name: '', status: false, role: 'simple_user' }));
   };
   return (
     <Flex

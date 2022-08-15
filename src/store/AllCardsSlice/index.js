@@ -40,7 +40,7 @@ export const allCardsSlice = createSlice({
     },
     unCheckCard: (state, action) => {
       state.checkedCards = state.checkedCards.filter(
-        (card) => card.card !== action.payload.card
+        (card) => card !== action.payload
       );
     },
   },

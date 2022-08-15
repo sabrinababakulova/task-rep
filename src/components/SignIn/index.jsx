@@ -3,7 +3,7 @@ import validator from 'validator';
 import Input from '../Input';
 import { StyledButton, StyledForm, ErrorMessage } from './styles';
 import { useDispatch } from 'react-redux';
-import { setSimpleUser, setAdmin } from '../../store/UserSlide';
+import { setUser } from '../../store/UserSlide';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const SignIn = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validator.isEmail(userName)) {
+    if (!validator.isEmail(userName.trim())) {
       setErrorMessage(UserNameError);
       return;
     }
@@ -34,10 +34,13 @@ const SignIn = () => {
       setErrorMessage(PasswordError);
       return;
     }
-    if (userName === 'testAdmin@gmail.com' || password === '12345yuiopp') {
-      dispatch(setAdmin({name: userName, status: true}));
+    if (
+      userName.trim() === 'testAdmin@gmail.com' &&
+      password === '12345yuiopp'
+    ) {
+      dispatch(setUser({ name: userName, status: true, role: 'admin' }));
     } else {
-      dispatch(setSimpleUser({ name: userName, status: true }));
+      dispatch(setUser({ name: userName, status: true, role: 'simple_user' }));
     }
     setErrorMessage('');
   };

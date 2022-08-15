@@ -111,6 +111,7 @@ const Card = ({ data, editing, cardType, onClose }) => {
         setEditApproved={setEditApproved}
         header={header}
         cardId={data.id}
+        boxChecked={boxChecked}
       />
 
       <CardBody
