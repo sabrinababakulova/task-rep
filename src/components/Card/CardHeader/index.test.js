@@ -10,6 +10,7 @@ jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useDispatch: () => mockReduxDispatch,
 }));
+
 test('card header should be rendered', () => {
   renderWithRouter(
     <CardHeader
@@ -30,6 +31,16 @@ test('on clicking checkbox redux action should be called', () => {
       setHeader={mockSetHeader}
       setEditApproved={mockSetEditApproved}
       header="header"
+      cardId="1"
     />
   );
+  expect(mockReduxDispatch).toHaveBeenCalledTimes(0);
+  expect(screen.getByTestId('checkbox')).toBeInTheDocument();
+  fireEvent.change(screen.getByTestId('checkbox'), {
+    target: { checked: true },
+  });
+  expect(screen.getByTestId('checkbox')).toBeChecked();
+  // fireing change AND click because of the bug in react-testing-library
+  fireEvent.click(screen.getByTestId('checkbox'));
+  expect(mockReduxDispatch).toHaveBeenCalledTimes(1);
 });

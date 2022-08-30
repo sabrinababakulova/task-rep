@@ -10,18 +10,10 @@ const mockData = {
 };
 const mockOnClose = jest.fn();
 const mockUseNavigate = jest.fn();
-const mockReduxDispatch = jest.fn();
-afterEach(() => {
-  jest.clearAllMocks();
-  jest.resetAllMocks();
-});
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockUseNavigate,
-}));
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: () => mockReduxDispatch,
 }));
 
 test('display card on the screen', () => {

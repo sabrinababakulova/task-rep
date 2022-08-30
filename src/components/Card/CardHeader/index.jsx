@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Flex,
-  Checkbox,
   FormControl,
   Input,
   Divider,
@@ -10,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { checkCard, unCheckCard } from '../../../store/AllCardsSlice';
+import { Checkbox, LabelStyled } from '../../FuncButtons/Styles/CheckBoxStyled';
 
 const CardHeader = ({
   editApproved,
@@ -22,8 +22,10 @@ const CardHeader = ({
   boxChecked,
 }) => {
   const dispatch = useDispatch();
-  const handleChange = (isChecked) => {
-    isChecked ? dispatch(checkCard(cardId)) : dispatch(unCheckCard(cardId));
+  const handleChange = (e) => {
+    e.target.checked
+      ? dispatch(checkCard(cardId))
+      : dispatch(unCheckCard(cardId));
   };
   return (
     <>
@@ -45,15 +47,9 @@ const CardHeader = ({
           )}
         </FormControl>
         {showBtns && !isEditing ? (
-          <Checkbox
-            data-testid="checkbox"
-            onChange={(e) => {
-              handleChange(e.target.checked);
-            }}
-            isChecked={boxChecked}
-            colorScheme="green"
-            borderColor="gray.500"
-          />
+          <LabelStyled>
+            <Checkbox checked={boxChecked} onChange={handleChange} />
+          </LabelStyled>
         ) : null}
       </Flex>
 
