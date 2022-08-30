@@ -33,6 +33,7 @@ const CardHeader = ({
           onChange={() => setEditApproved(true)}
         >
           <Input
+            data-testid="cardHeader"
             variant={isEditing ? 'filled' : 'unstyled'}
             fontSize="2xl"
             isReadOnly={!isEditing}
@@ -45,6 +46,7 @@ const CardHeader = ({
         </FormControl>
         {showBtns && !isEditing ? (
           <Checkbox
+            data-testid="checkbox"
             onChange={(e) => {
               handleChange(e.target.checked);
             }}
