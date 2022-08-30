@@ -17,12 +17,12 @@ jest.mock('react-router-dom', () => ({
 }));
 
 test('display card on the screen', () => {
-  renderWithRouter(<Card data={mockData} data-testid="card" />);
+  renderWithRouter(<Card data={mockData} />);
   expect(screen.getByTestId('card')).toBeInTheDocument();
 });
 
 test("on double click card redirect to the card's own page", () => {
-  renderWithRouter(<Card data={mockData} data-testid="card" />);
+  renderWithRouter(<Card data={mockData} />);
   expect(mockUseNavigate).toHaveBeenCalledTimes(0);
   fireEvent.doubleClick(screen.getByTestId('card'));
   expect(mockUseNavigate).toHaveBeenCalledTimes(1);
@@ -30,7 +30,7 @@ test("on double click card redirect to the card's own page", () => {
 });
 
 test('on discard card should have initial stats', () => {
-  renderWithRouter(<Card data={mockData} data-testid="card" />);
+  renderWithRouter(<Card data={mockData} />);
 
   fireEvent.click(screen.getByTestId('editBtn'));
 
@@ -51,7 +51,7 @@ test('on discard card should have initial stats', () => {
 });
 
 test('on save card should have new stats', () => {
-  renderWithRouter(<Card data={mockData} data-testid="card" />);
+  renderWithRouter(<Card data={mockData} />);
 
   fireEvent.click(screen.getByTestId('editBtn'));
 
@@ -73,36 +73,25 @@ test('on save card should have new stats', () => {
 });
 
 test('if user in preview card page, should not have edit button', () => {
-  renderWithRouter(
-    <Card cardType="previewCard" data={mockData} data-testid="card" />
-  );
+  renderWithRouter(<Card cardType="previewCard" data={mockData} />);
 
   expect(screen.queryByTestId('editBtn')).not.toBeInTheDocument();
 });
 
 test('if user is creating new card, should have save/delete buttons only', () => {
-  renderWithRouter(
-    <Card cardType="newCard" data={mockData} data-testid="card" />
-  );
+  renderWithRouter(<Card cardType="newCard" data={mockData} />);
   expect(screen.queryByTestId('editBtn')).not.toBeInTheDocument();
   expect(screen.getByTestId('saveDiscardBtn')).toBeInTheDocument();
 });
 
 test('if user in preview card and is not editing, should not see checkbox', () => {
-  renderWithRouter(
-    <Card cardType="previewCard" data={mockData} data-testid="card" />
-  );
+  renderWithRouter(<Card cardType="previewCard" data={mockData} />);
   expect(screen.queryByTestId('checkbox')).not.toBeInTheDocument();
 });
 
 test('after discarding new card, modal should close', () => {
   renderWithRouter(
-    <Card
-      cardType="newCard"
-      data={mockData}
-      data-testid="card"
-      onClose={mockOnClose}
-    />
+    <Card cardType="newCard" data={mockData} onClose={mockOnClose} />
   );
   expect(mockOnClose).toHaveBeenCalledTimes(0);
   expect(screen.getByTestId('saveDiscardBtn')).toBeInTheDocument();
@@ -115,12 +104,7 @@ test('after discarding new card, modal should close', () => {
 
 test('after accepting new card, modal should close', () => {
   renderWithRouter(
-    <Card
-      cardType="newCard"
-      data={mockData}
-      data-testid="card"
-      onClose={mockOnClose}
-    />
+    <Card cardType="newCard" data={mockData} onClose={mockOnClose} />
   );
 
   expect(mockOnClose).toHaveBeenCalledTimes(0);
@@ -133,7 +117,7 @@ test('after accepting new card, modal should close', () => {
 });
 
 test('if header is empty, should not be able to save', () => {
-  renderWithRouter(<Card data={mockData} data-testid="card" />);
+  renderWithRouter(<Card data={mockData} />);
 
   fireEvent.click(screen.getByTestId('editBtn'));
   fireEvent.input(screen.getByTestId('cardHeader'), {

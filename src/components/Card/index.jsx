@@ -121,7 +121,6 @@ export const Card = ({ data, editing, cardType, onClose }) => {
         body={body}
         isEditing={isEditing}
         setBody={setBody}
-        setRevertBody={setRevertBody}
       />
 
       <Spacer h="12" />
