@@ -56,7 +56,7 @@ describe('<CardHeader />', () => {
     expect(mockReduxDispatch).toHaveBeenCalledWith(mockDispatchUncheck);
     const mockDispatchCheck = {
       payload: mockData.id,
-      type: 'allCardsInfo/unCheckCard',
+      type: 'allCardsInfo/checkCard',
     };
     fireEvent.click(screen.getByTestId('checkbox'));
     expect(mockReduxDispatch).toHaveBeenCalledTimes(2);

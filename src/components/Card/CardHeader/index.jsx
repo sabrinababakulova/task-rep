@@ -22,8 +22,8 @@ const CardHeader = ({
   boxChecked,
 }) => {
   const dispatch = useDispatch();
-  const handleChange = (e) => {
-    e.target.checked
+  const handleChange = ({target}) => {
+    target.checked
       ? dispatch(checkCard(cardId))
       : dispatch(unCheckCard(cardId));
   };

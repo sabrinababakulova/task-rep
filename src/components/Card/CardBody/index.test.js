@@ -52,7 +52,6 @@ describe('<CardBody />', () => {
       />
     );
     expect(mockSetBody).toHaveBeenCalledTimes(0);
-    expect(mockSetRevertedBody).toHaveBeenCalledTimes(0);
     fireEvent.change(screen.getByTestId('cardBody'), {
       target: { value: 'new body' },
     });
