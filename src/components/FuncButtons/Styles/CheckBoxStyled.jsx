@@ -27,6 +27,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const StyledCheckbox = styled.div`
+  cursor: pointer;
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -43,7 +44,7 @@ const StyledCheckbox = styled.div`
 
 export const Checkbox = ({ checked, ...props }) => (
   <CheckboxContainer>
-    <HiddenCheckbox checked={checked} {...props} />
+    <HiddenCheckbox data-testid="checkbox" checked={checked} {...props} />
     <StyledCheckbox checked={checked}>
       <Icon viewBox="0 0 24 24">
         <polyline points="20 6 9 17 4 12" />
@@ -57,7 +58,7 @@ Checkbox.propTypes = {
 };
 
 export const LabelStyled = styled.label`
-  border: 2px solid teal;
-  padding:4px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;

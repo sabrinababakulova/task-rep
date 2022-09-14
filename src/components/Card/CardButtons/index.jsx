@@ -22,7 +22,7 @@ const CardButton = ({
   };
   if (isEditing && !isReadOnly) {
     return (
-      <>
+      <div data-testid="saveDiscardBtn">
         <ButtonGroup
           justifyContent="space-around"
           w="full"
@@ -30,20 +30,23 @@ const CardButton = ({
           onClick={handleClick}
         >
           <IconButton
+            data-testid="discardBtn"
             icon={<GrRevert size="32" />}
             onClick={validationOnDiscard}
           />
           <IconButton
+            data-testid="saveBtn"
             isDisabled={!editApproved}
             icon={<FaRegSave size="32" />}
             onClick={validationOnSave}
           />
         </ButtonGroup>
-      </>
+      </div>
     );
   } else {
     return (
       <IconButton
+        data-testid="editBtn"
         isDisabled={isReadOnly}
         size="lg"
         icon={<BsPencilSquare size="32" />}

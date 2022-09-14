@@ -10,8 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCard, editCard } from '../../store/AllCardsSlice';
 import validator from 'validator';
 import { useNavigate } from 'react-router-dom';
-
-const Card = ({ data, editing, cardType, onClose }) => {
+export const Card = ({ data, editing, cardType, onClose }) => {
   const navigate = useNavigate();
   const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
   const checkedCards = useSelector((state) => state.allCardsInfo.checkedCards);
@@ -35,14 +34,25 @@ const Card = ({ data, editing, cardType, onClose }) => {
     isReadOnly && setIsEditing(false);
   }, [isReadOnly]);
 
+  useEffect(() => {
+    switch (cardType) {
+      case 'newCard':
+        setIsEditing(true);
+        break;
+      case 'previewCard':
+        user.role === 'simple_user' && setIsEditing(false);
+        setShowBtns(false);
+        break;
+    }
+  }, []);
+
   const validationOnDiscard = () => {
-    setShowBtns(true);
     switch (cardType) {
       case 'newCard':
         onClose();
         break;
-      case 'previewCard':
-        setShowBtns(false);
+      default:
+        setShowBtns(true);
         break;
     }
     setHeader(revertHeader);
@@ -66,15 +76,6 @@ const Card = ({ data, editing, cardType, onClose }) => {
           dispatch(addCard(createdCard));
           onClose();
           break;
-        case 'previewCard':
-          const editedCard = {
-            id: data.id,
-            header,
-            body,
-          };
-          dispatch(editCard(editedCard));
-          navigate(-1);
-          break;
         default:
           dispatch(
             editCard({
@@ -83,6 +84,7 @@ const Card = ({ data, editing, cardType, onClose }) => {
               body,
             })
           );
+          navigate('/');
           break;
       }
       setRevertHeader(header);
@@ -94,6 +96,7 @@ const Card = ({ data, editing, cardType, onClose }) => {
 
   return (
     <Box
+      data-testid="card"
       boxShadow="base"
       align="center"
       p="6"
@@ -118,12 +121,12 @@ const Card = ({ data, editing, cardType, onClose }) => {
         body={body}
         isEditing={isEditing}
         setBody={setBody}
-        setRevertBody={setRevertBody}
       />
 
       <Spacer h="12" />
       {cardType === 'previewCard' && user.role === 'simple_user' ? null : (
         <CardButton
+          data-testid="cardButtons"
           cardId={data.id}
           isEditing={isEditing}
           validationOnDiscard={validationOnDiscard}
@@ -135,7 +138,6 @@ const Card = ({ data, editing, cardType, onClose }) => {
     </Box>
   );
 };
-
 const CardWithLoadingDelay = withLoadingDelay(Card);
 
 Card.propTypes = {
