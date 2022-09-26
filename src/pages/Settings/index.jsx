@@ -1,7 +1,13 @@
-import React from 'react';
-import ReadOnly from '../../components/FuncButtons/ReadOnly';
+import React, { Suspense } from 'react';
+const ReadOnly = React.lazy(() =>
+  import('../../components/FuncButtons/ReadOnly')
+);
 const SettingsPage = () => {
-  return <ReadOnly />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ReadOnly />
+    </Suspense>
+  );
 };
 
 export default SettingsPage;
