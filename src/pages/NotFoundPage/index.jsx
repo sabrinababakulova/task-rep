@@ -2,11 +2,12 @@ import React from 'react';
 import { Box, Center, Heading, Image, Button } from '@chakra-ui/react';
 import AnimeGirl from '../../assets/NotFoundPhoto.png';
 import { Link } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 const NotFoundPage = () => {
+  const { t } = useTranslation();
   return (
     <Box mt="10em" textAlign="center">
-      <Heading mb="3">404 PAGE NOT FOUND</Heading>
+      <Heading mb="3">{t('pages.404')}</Heading>
       <Center mb="5">
         <Image
           lazy
@@ -26,7 +27,7 @@ const NotFoundPage = () => {
             boxShadow: '0 0 2px 0 teal, inset 0 0 2px 0 white',
           }}
         >
-          Go Home
+          {t('pages.goHome')}
         </Button>
       </Link>
     </Box>

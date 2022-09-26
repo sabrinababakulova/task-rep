@@ -4,16 +4,13 @@ import Input from '../Input';
 import { StyledButton, StyledForm, ErrorMessage } from './styles';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/UserSlide';
-
+import { useTranslation } from 'react-i18next';
 const SignIn = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const UserNameError = 'Please make sure that your user name is your email';
-  const PasswordError =
-    'Please make sure that the password is at least 8 characters long, and contains at least one number and one letter.';
-
   const hasNumber = (myString) => {
     return /\d/.test(myString);
   };
@@ -23,7 +20,7 @@ const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validator.isEmail(userName.trim())) {
-      setErrorMessage(UserNameError);
+      setErrorMessage(t('errors.usernameError'));
       return;
     }
     if (
@@ -31,7 +28,7 @@ const SignIn = () => {
       !hasLetters(password) ||
       !hasNumber(password)
     ) {
-      setErrorMessage(PasswordError);
+      setErrorMessage(t('errors.passwordError'));
       return;
     }
     if (
@@ -49,19 +46,19 @@ const SignIn = () => {
       <Input
         type="text"
         id="email"
-        label="User name"
+        label={t('header.username')}
         setErrorMessage={setErrorMessage}
         setValue={setUserName}
       />
       <Input
         type="password"
         id="password"
-        label="PassWord"
+        label={t('header.password')}
         setErrorMessage={setErrorMessage}
         setValue={setPassword}
       />
       <StyledButton type="submit" disabled={errorMessage}>
-        Sign in
+        {t('header.signIn')}
       </StyledButton>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </StyledForm>

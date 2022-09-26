@@ -3,7 +3,9 @@ import { Text, Flex, Badge, Button } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../store/UserSlide';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 const Header = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const cardsCollection = useSelector(
     (state) => state.allCardsInfo.cardsCollection
@@ -32,24 +34,28 @@ const Header = () => {
         boxShadow: 'lg',
       }}
     >
-      <Button onClick={onClickSignOut}>Sign out</Button>
+      <Button onClick={onClickSignOut}>{t('header.signOut')}</Button>
       <NavLink to="/">
         {({ isActive }) => (
-          <Button colorScheme={isActive ? 'teal' : 'gray'}>Home</Button>
+          <Button colorScheme={isActive ? 'teal' : 'gray'}>
+            {t('header.home')}
+          </Button>
         )}
       </NavLink>
       <Text fontWeight="bold" align="center">
-        Welcome {user.name.split('@')[0]}!
+        {t('header.welcome')} {user.name.split('@')[0]}!
       </Text>
       {user.role === 'admin' && (
         <NavLink to="/settings">
           {({ isActive }) => (
-            <Button colorScheme={isActive ? 'teal' : 'gray'}>Settings</Button>
+            <Button colorScheme={isActive ? 'teal' : 'gray'}>
+              {t('header.settings')}
+            </Button>
           )}
         </NavLink>
       )}
       <Text fontWeight="bold" align="center">
-        Number Of cards:
+        {t('header.numOfCards')}
         <Badge ml="2" fontSize="1rem" colorScheme="facebook">
           {cardsCollection.length}
         </Badge>

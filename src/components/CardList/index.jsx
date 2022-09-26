@@ -3,7 +3,9 @@ import { Box, Grid, Badge, Spinner, Center } from '@chakra-ui/react';
 import Card from '../Card';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchData } from '../../store/AllCardsSlice';
+import { useTranslation } from 'react-i18next';
 const CardList = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
     if (!allCardsInfo.status) dispatch(fetchData());
@@ -25,7 +27,7 @@ const CardList = () => {
       >
         {allCardsInfo.cardsCollection.length === 0 ? (
           <Badge colorScheme="red" mt="4" fontSize="1em">
-            You dont have any cards
+            {t('errors.noCards')}
           </Badge>
         ) : (
           allCardsInfo.cardsCollection
