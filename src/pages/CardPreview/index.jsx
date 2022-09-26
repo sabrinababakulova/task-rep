@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Card from '../../components/Card';
 import { useSelector } from 'react-redux';
 import { Button, Spacer } from '@chakra-ui/react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+const Card = React.lazy(() => import('../../components/Card'));
 const CardPreview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,13 +18,13 @@ const CardPreview = () => {
     !card && navigate('/does-not-exist');
   }, []);
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Button onClick={handleGoBack} variant="link" fontSize="2xl">
         <AiOutlineArrowLeft /> Go Back
       </Button>
       <Spacer h="12" />
       <Card data={card} editing={true} cardType="previewCard" />
-    </>
+    </Suspense>
   );
 };
 
