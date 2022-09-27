@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { checkCard, unCheckCard } from '../../../store/AllCardsSlice';
 import { Checkbox, LabelStyled } from '../../FuncButtons/Styles/CheckBoxStyled';
-
+import { useTranslation } from 'react-i18next';
 const CardHeader = ({
   editApproved,
   isEditing,
@@ -21,8 +21,9 @@ const CardHeader = ({
   showBtns,
   boxChecked,
 }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const handleChange = ({target}) => {
+  const handleChange = ({ target }) => {
     target.checked
       ? dispatch(checkCard(cardId))
       : dispatch(unCheckCard(cardId));
@@ -43,7 +44,7 @@ const CardHeader = ({
             onChange={(e) => setHeader(e.target.value)}
           />
           {!editApproved && (
-            <FormErrorMessage>Header should not be empty</FormErrorMessage>
+            <FormErrorMessage>{t('errors.notEmpty')}</FormErrorMessage>
           )}
         </FormControl>
         {showBtns && !isEditing ? (

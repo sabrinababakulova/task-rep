@@ -11,8 +11,9 @@ import {
 } from '@chakra-ui/react';
 import Card from '../../Card';
 import { useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 const AddCard = () => {
+  const { t } = useTranslation();
   const isReadOnly = useSelector((state) => state.allCardsInfo.isReadOnly);
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -23,7 +24,7 @@ const AddCard = () => {
         variant="outline"
         onClick={onOpen}
       >
-        Add
+        {t('buttons.addCard')}
       </Button>
 
       <Modal
@@ -34,7 +35,7 @@ const AddCard = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Set info for card</ModalHeader>
+          <ModalHeader>{t('buttons.cardInfo')}</ModalHeader>
           <Center>
             <Card
               data={{ header: '', body: '' }}
